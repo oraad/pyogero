@@ -53,8 +53,8 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          # artifacts: "dist/*"
-          tag: ${{steps.version.outputs.VERSION}}
+          artifacts: "dist/*"
+          name: ${{steps.version.outputs.VERSION}}
           replacesArtifacts: true
           token: ${{ secrets.RELEASE_TOKEN }}
 
