@@ -54,7 +54,7 @@ jobs:
         with:
           allowUpdates: true
           artifacts: "dist/*"
-          name: ${{steps.version.outputs.VERSION}}
+          #name: ${{steps.version.outputs.VERSION}}
           replacesArtifacts: true
           token: ${{ secrets.RELEASE_TOKEN }}
 
