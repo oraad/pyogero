@@ -1,10 +1,10 @@
-name: CI_Main
+name: RELEASE
 on:
   push:
     branches: [main]
 
 jobs:
-  ci:
+  test:
     strategy:
       fail-fast: false
       matrix:
@@ -28,13 +28,10 @@ jobs:
       - name: Test
         run: poetry run pytest tests/test_mock_*
 
-  release:
-    needs: ci
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.10"]
-        poetry-version: ["1.2"]
+  build:
+    permissions:
+      contents: write
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -42,11 +39,11 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: 3.10
       - name: Setup Poetry
         uses: abatilo/actions-poetry@v2
         with:
-          poetry-version: ${{ matrix.poetry-version }}
+          poetry-version: 1.2
 
       - name: Get version
         id: version
