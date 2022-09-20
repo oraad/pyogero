@@ -31,10 +31,8 @@ jobs:
           artifacts: "dist/*"
           tag: "${{steps.version.outputs.VERSION}}"
           replacesArtifacts: true
-          # token: ${{ secrets.RELEASE_TOKEN }}
-
-      # - name: Build and publish to pypi
-      #   uses: JRubics/poetry-publish@v1.13
-      #   # with:
-      #   #   pypi_token: ${{ secrets.PYPI_TOKEN }}
+      - name: Build and publish to pypi
+        uses: JRubics/poetry-publish@v1.13
+        with:
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
   
