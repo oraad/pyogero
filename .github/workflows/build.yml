@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     tags: ['v*']
-  repository_dispatch:
+  workflow_dispatch:
 
 jobs:
   create-tag:
