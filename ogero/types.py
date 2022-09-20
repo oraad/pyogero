@@ -3,7 +3,7 @@
 from datetime import datetime
 from enum import Enum
 from typing import List, TypedDict, Union
-from pydantic import BaseModel, SecretStr
+from pydantic import BaseModel
 
 Content = Union[bytes, str]
 
