@@ -12,7 +12,15 @@ from .const import (
     TOTAL_CONSUMPTION,
     UPLOAD,
 )
-from .types import Account, Bill, BillInfo, BillStatus, Content, ConsumptionInfo
+from .types import (
+    Account,
+    Bill,
+    BillAmount,
+    BillInfo,
+    BillStatus,
+    Content,
+    ConsumptionInfo,
+)
 
 
 def __parse_status_value(str_val: str):
@@ -22,6 +30,38 @@ def __parse_status_value(str_val: str):
         return float("inf")
     else:
         return float(val)
+
+def __parse_bill_status(amount_tag: Tag, bill: Bill) -> None:
+    col_status = amount_tag.parent.findNextSibling("td")
+    status = col_status.get_text(strip=True).lower()
+    if status == "paid":
+        bill.status = BillStatus.PAID
+    elif status == "not paid":
+        bill.status = BillStatus.UNPAID
+    else:
+        bill.status = BillStatus.UNKNOWN
+    logging.debug(f"status: {bill.status}")
+
+
+def __parse_bill(bill_tag: Tag):
+    bill = Bill()
+    col_date = bill_tag.find(class_="BillDate")
+    if col_date is None:
+        return None
+
+    date_text = col_date.get_text(strip=True)
+    bill.date = datetime.strptime(date_text, "%b%Y")
+
+    logging.debug(f"date: {bill.date.strftime('%b %Y')}")
+
+    col_amount = bill_tag.find(class_="BillAmount")
+    amount_str = col_amount.get_text(strip=True)
+    bill.amount = BillAmount.parse(amount_str)
+    logging.debug(f"amount: {bill.amount}")
+
+    __parse_bill_status(col_amount, bill)
+
+    return bill
 
 
 def parse_content(content: Content):
@@ -80,45 +120,31 @@ def parse_bills(content: Content) -> BillInfo:
 
     bill_info = BillInfo()
 
-    bill_info.total_outstanding = (
-        parse_content(content)
-        .find(class_="BillOutstandingSection1")
-        .find("span")
-        .get_text(strip=True)
+    bill_outstanding_section = parse_content(content).find(
+        class_="BillOutstandingSection1"
     )
+
+    if bill_outstanding_section is not None:
+        bill_outstanding_val =  bill_outstanding_section.find("span").get_text(
+            strip=True
+        )
+
+        bill_info.total_outstanding = BillAmount.parse(bill_outstanding_val)
+    else:
+        bill_info.total_outstanding = BillAmount()
 
     logging.debug(f"outstanding {bill_info.total_outstanding}")
 
     bill_table = parse_content(content).find("table", class_="BillTable")
     bill_rows: List[Tag] = bill_table.find_all("tr")
 
-    # logging.debug(f"table {bill_table}")
-
     for row in bill_rows:
 
-        bill = Bill()
-        col_date = row.find(class_="BillDate")
-        if col_date is None:
-            continue
-        date_text = col_date.get_text(strip=True)
-        bill.date = datetime.strptime(date_text, "%b%Y")
-
         logging.debug(f"################################")
-        logging.debug(f"date: {bill.date.strftime('%b %Y')}")
+        bill = __parse_bill(row)
 
-        col_amount = row.find(class_="BillAmount")
-        bill.amount = col_amount.get_text(strip=True)
-        logging.debug(f"amount: {bill.amount}")
-
-        col_status = col_amount.parent.findNextSibling("td")
-        status = col_status.get_text(strip=True).lower()
-        if status == "paid":
-            bill.status = BillStatus.PAID
-        elif status == "not paid":
-            bill.status = BillStatus.UNPAID
-        else:
-            bill.status = BillStatus.UNKNOWN
-        logging.debug(f"status: {bill.status}")
+        if bill is None:
+            continue
 
         bill_info.bills.append(bill)
 
@@ -129,26 +155,20 @@ def parse_bills(content: Content) -> BillInfo:
 
 def parse_error_message(content: Content):
 
-    script_tag = (
-        parse_content(content)
-        .find("script", {"language": "javascript"})
-    )
+    script_tag = parse_content(content).find("script", {"language": "javascript"})
 
     if script_tag is None:
         return None
 
-    msg = (
-        script_tag
-        .get_text(strip=True)
-    )
+    msg = script_tag.get_text(strip=True)
 
     err_idx = msg.find("error=")
     if err_idx == -1:
         return None
 
-    err_msg = msg[err_idx + 6:]
+    err_msg = msg[err_idx + 6 :]
     err_msg = err_msg.split("&")[0]
     err_msg = err_msg.split(";")[0]
-    err_msg = err_msg.split("\"")[0]
+    err_msg = err_msg.split('"')[0]
 
     return err_msg
