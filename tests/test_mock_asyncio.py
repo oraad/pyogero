@@ -9,9 +9,11 @@ from ogero.asyncio import Ogero
 from ogero.const import API_ENDPOINTS
 from ogero.types import ConfigUser
 from ogero.exceptions import AuthenticationException
+from tests.const import NO_OUTSTANDING_SESSION_ID_SUFFIX
 
 from .mock_data import (
     MOCK_SESSION_ID,
+    bill_response_no_outstanding_bill,
     successful_login_response,
     failed_login_response,
     dashboard_response,
@@ -53,6 +55,9 @@ def bill_callback(url: URL, **kwargs):
     session_id = data_dict["SessionID"]
     if session_id == MOCK_SESSION_ID:
         mock_data, status_code, headers = bill_response()
+        return CallbackResult(status=status_code, headers=headers, body=mock_data)
+    elif session_id == MOCK_SESSION_ID + NO_OUTSTANDING_SESSION_ID_SUFFIX:
+        mock_data, status_code, headers = bill_response_no_outstanding_bill()
         return CallbackResult(status=status_code, headers=headers, body=mock_data)
     else:
         mock_data, status_code, headers = unauthorized_response()
@@ -145,6 +150,18 @@ async def test_get_bill_info(aio_mock: aioresponses):
         assert bill_info.total_outstanding is not None
         assert len(bill_info.bills) >= 1
 
+@pytest.mark.asyncio
+async def test_get_bill_info_no_outstanding_bill(aio_mock: aioresponses):
+    async with aiohttp.ClientSession() as session:
+        client = Ogero("user", "pass", session=session)
+
+        await client.login()
+        accounts = await client.get_accounts()
+        client.session_id += NO_OUTSTANDING_SESSION_ID_SUFFIX
+        bill_info = await client.get_bill_info(accounts[0])
+        assert bill_info is not None
+        assert bill_info.total_outstanding is not None
+        assert len(bill_info.bills) >= 1
 
 @pytest.mark.asyncio
 async def test_relogin(aio_mock: aioresponses):
