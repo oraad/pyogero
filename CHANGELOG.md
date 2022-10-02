@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+- Upgrade `aiohttp` to 3.8.3
+- Fix `get_bill_info` method to support cases with no outstanding bill
+- Added `BillAmount` class to parse bill amount
+
 ## 0.1.0
 
 - Added `login` method
