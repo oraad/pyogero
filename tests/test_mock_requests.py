@@ -6,8 +6,10 @@ from urllib.parse import parse_qs
 from ogero import Ogero
 from ogero.const import API_ENDPOINTS
 from ogero.exceptions import AuthenticationException
+from tests.const import NO_OUTSTANDING_SESSION_ID_SUFFIX
 from .mock_data import (
     MOCK_SESSION_ID,
+    bill_response_no_outstanding_bill,
     successful_login_response,
     failed_login_response,
     dashboard_response,
@@ -15,7 +17,6 @@ from .mock_data import (
     consumption_response,
     unauthorized_response,
 )
-
 
 def login_callback(request: requests.Request, context: requests.Response):
     data_dict = parse_qs(request.text)
@@ -57,6 +58,11 @@ def bill_callback(request: requests.Request, context: requests.Response):
     session_id = data_dict["sessionid"][0]
     if session_id == MOCK_SESSION_ID:
         mock_data, status_code, headers = bill_response()
+        context.status_code = status_code
+        context.headers = headers
+        return mock_data
+    elif session_id == MOCK_SESSION_ID + NO_OUTSTANDING_SESSION_ID_SUFFIX:
+        mock_data, status_code, headers = bill_response_no_outstanding_bill()
         context.status_code = status_code
         context.headers = headers
         return mock_data
@@ -145,6 +151,16 @@ def test_get_bill_info(requests_mock: Mocker):
         assert bill_info.total_outstanding is not None
         assert len(bill_info.bills) >= 1
 
+def test_get_bill_info_no_outstanding(requests_mock: Mocker):
+    with requests.Session() as session:
+        client = Ogero("user", "pass", session=session)
+        client.login()
+        accounts = client.get_accounts()
+        client.session_id += NO_OUTSTANDING_SESSION_ID_SUFFIX
+        bill_info = client.get_bill_info(accounts[0])
+        assert bill_info is not None
+        assert bill_info.total_outstanding is not None
+        assert len(bill_info.bills) >= 1
 
 def test_relogin(requests_mock: Mocker):
     with requests.Session() as session:
