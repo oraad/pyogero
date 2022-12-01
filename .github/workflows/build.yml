@@ -32,6 +32,6 @@ jobs:
           tag: "${{steps.version.outputs.VERSION}}"
           replacesArtifacts: true
       - name: Build and publish to pypi
-        uses: JRubics/poetry-publish@v1.13
+        uses: JRubics/poetry-publish@v1.15
         with:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
