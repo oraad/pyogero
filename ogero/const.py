@@ -1,11 +1,13 @@
 """ constants """
 
-from typing import TypedDict
+from typing import TypedDict, Mapping, TypeAlias
 
 BASEURL = {
     "api": "https://ogero.gov.lb/API",
     "myogero": "https://ogero.gov.lb/myogero",
 }
+
+Headers: TypeAlias = Mapping[str, str | bytes | None]
 
 
 DefaultHeaders = TypedDict(
@@ -20,7 +22,9 @@ DefaultHeaders = TypedDict(
 )
 
 
-def default_headers() -> DefaultHeaders:
+
+
+def default_headers() -> Headers:
     """returns a default set of headers"""
     return {
         "Accept": "application/json",

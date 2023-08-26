@@ -1,8 +1,8 @@
 """ shared utilities """
 from datetime import datetime
 import logging
-from typing import List
-from bs4 import BeautifulSoup, ResultSet, Tag
+from typing import Optional
+from bs4 import BeautifulSoup, ResultSet, Tag, NavigableString
 from .const import (
     CONNECTION_SPEED,
     DOWNLOAD,
@@ -31,8 +31,15 @@ def __parse_status_value(str_val: str):
     else:
         return float(val)
 
-def __parse_bill_status(amount_tag: Tag, bill: Bill) -> None:
+
+def __parse_bill_status(amount_tag: Tag | NavigableString, bill: Bill) -> None:
+    if amount_tag.parent is None:
+        return
+
     col_status = amount_tag.parent.findNextSibling("td")
+    if col_status is None:
+        return
+
     status = col_status.get_text(strip=True).lower()
     if status == "paid":
         bill.status = BillStatus.PAID
@@ -55,6 +62,9 @@ def __parse_bill(bill_tag: Tag):
     logging.debug(f"date: {bill.date.strftime('%b %Y')}")
 
     col_amount = bill_tag.find(class_="BillAmount")
+    if col_amount is None:
+        return
+
     amount_str = col_amount.get_text(strip=True)
     bill.amount = BillAmount.parse(amount_str)
     logging.debug(f"amount: {bill.amount}")
@@ -97,16 +107,19 @@ def parse_consumption_info(content: Content) -> ConsumptionInfo:
     return info
 
 
-def parse_accounts(content: Content) -> List[Account]:
+def parse_accounts(content: Content) -> list[Account]:
 
-    accounts: List[Account] = []
+    accounts: list[Account] = []
 
-    account_options = (
-        parse_content(content).find("select", id="changnumber").find_all("option")
-    )
+    account_options_node = parse_content(content).find("select", id="changnumber")
+    if account_options_node is None or isinstance(
+        account_options_node, NavigableString
+    ):
+        return []
+
+    account_options = account_options_node.find_all("option")
 
     for account_option in account_options:
-
         account = Account()
         account.phone = account_option.attrs["value"]
         account.internet = account_option.attrs["value2"]
@@ -117,17 +130,16 @@ def parse_accounts(content: Content) -> List[Account]:
 
 
 def parse_bills(content: Content) -> BillInfo:
-
+    
     bill_info = BillInfo()
 
-    bill_outstanding_section = parse_content(content).find(
-        class_="BillOutstandingSection1"
-    )
+    bill_outstanding_section: Optional[Tag | NavigableString] = parse_content(
+        content
+    ).find(class_="BillOutstandingSection1")
 
     if bill_outstanding_section is not None:
-        bill_outstanding_val =  bill_outstanding_section.find("span").get_text(
-            strip=True
-        )
+        tag:Tag = bill_outstanding_section.find("span") # type: ignore
+        bill_outstanding_val = tag.get_text(strip=True)
 
         bill_info.total_outstanding = BillAmount.parse(bill_outstanding_val)
     else:
@@ -135,11 +147,10 @@ def parse_bills(content: Content) -> BillInfo:
 
     logging.debug(f"outstanding {bill_info.total_outstanding}")
 
-    bill_table = parse_content(content).find("table", class_="BillTable")
-    bill_rows: List[Tag] = bill_table.find_all("tr")
+    bill_table: Tag = parse_content(content).find("table", class_="BillTable") # type: ignore
+    bill_rows: list[Tag] = bill_table.find_all("tr")
 
     for row in bill_rows:
-
         logging.debug(f"################################")
         bill = __parse_bill(row)
 

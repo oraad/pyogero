@@ -4,7 +4,7 @@ from datetime import datetime
 from enum import Enum
 from locale import currency
 import locale
-from typing import List, Optional, TypedDict, Union
+from typing import Optional, TypedDict, Union
 from pydantic import BaseModel
 
 Content = Union[bytes, str]
@@ -32,7 +32,7 @@ class BillAmount:
     currency: str
 
     def __init__(
-        self, amount: Optional[float] = 0, currency: Optional[str] = "LBP"
+        self, amount: float = 0, currency: str = "LBP"
     ) -> None:
 
         self.amount = amount
@@ -76,7 +76,7 @@ class Bill:
 
 class BillInfo:
     total_outstanding: BillAmount
-    bills: List[Bill] = []
+    bills: list[Bill] = []
 
     def __str__(self) -> str:
         return f"Total outstanding: {self.total_outstanding}"
@@ -87,7 +87,7 @@ class BillInfo:
 
 class ConsumptionInfo:
     speed: str
-    quota: int
+    quota: float
     upload: float
     download: float
     total_consumption: float
@@ -103,6 +103,7 @@ class ConsumptionInfo:
 
 class ErrorResponseContent(TypedDict):
     code: Union[int, str]
+    message: str
 
 
 class ErrorResponse(TypedDict):
@@ -121,4 +122,4 @@ class ConfigUser(BaseModel):
 class OgeroConfigFile(BaseModel):
     """config file definition"""
 
-    users: List[ConfigUser]
+    users: list[ConfigUser] = []

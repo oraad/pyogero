@@ -8,8 +8,6 @@ It needs at least one user in the "users" field. eg:
     ]
 }
 """
-
-from typing import List
 import pytest
 import aiohttp
 from ogero.asyncio import Ogero
@@ -24,7 +22,7 @@ if CONFIG is None or len(CONFIG.users) == 0:
 
 
 @pytest.fixture(name="users")
-def userfactory() -> List[ConfigUser]:
+def userfactory() -> list[ConfigUser]:
     """API factory"""
 
     return CONFIG.users
@@ -36,7 +34,7 @@ def test_missing_credentials():
 
 
 @pytest.mark.asyncio
-async def test_login(users: List[ConfigUser]):
+async def test_login(users: list[ConfigUser]):
     for user in users:
         async with aiohttp.ClientSession() as session:
             client = Ogero(user.username, user.password, session=session)
@@ -54,7 +52,7 @@ async def test_failed_login():
 
 
 @pytest.mark.asyncio
-async def test_get_accounts(users: List[ConfigUser]):
+async def test_get_accounts(users: list[ConfigUser]):
     for user in users:
         async with aiohttp.ClientSession() as session:
             client = Ogero(user.username, user.password, session=session)
@@ -66,7 +64,7 @@ async def test_get_accounts(users: List[ConfigUser]):
 
 
 @pytest.mark.asyncio
-async def test_get_consumption_info(users: List[ConfigUser]):
+async def test_get_consumption_info(users: list[ConfigUser]):
     for user in users:
         async with aiohttp.ClientSession() as session:
             client = Ogero(user.username, user.password, session=session)
@@ -79,7 +77,7 @@ async def test_get_consumption_info(users: List[ConfigUser]):
 
 
 @pytest.mark.asyncio
-async def test_get_bill_info(users: List[ConfigUser]):
+async def test_get_bill_info(users: list[ConfigUser]):
     for user in users:
         async with aiohttp.ClientSession() as session:
             client = Ogero(user.username, user.password, session=session)
@@ -93,7 +91,7 @@ async def test_get_bill_info(users: List[ConfigUser]):
 
 
 @pytest.mark.asyncio
-async def test_relogin(users: List[ConfigUser]):
+async def test_relogin(users: list[ConfigUser]):
     for user in users:
         async with aiohttp.ClientSession() as session:
             client = Ogero(user.username, user.password, session=session)

@@ -30,10 +30,10 @@ def login_callback(url: URL, **kwargs):
 
     if username == "user" and password == "pass":
         mock_data, status_code, headers = successful_login_response()
-        return CallbackResult(status=status_code, headers=headers, payload=mock_data)
+        return CallbackResult(status=status_code, headers=headers, payload=dict(mock_data))
     else:
         mock_data, status_code, headers = failed_login_response()
-        return CallbackResult(status=status_code, headers=headers, payload=mock_data)
+        return CallbackResult(status=status_code, headers=headers, payload=dict(mock_data))
 
 
 def dashboard_callback(url: URL, **kwargs):
@@ -157,7 +157,8 @@ async def test_get_bill_info_no_outstanding_bill(aio_mock: aioresponses):
 
         await client.login()
         accounts = await client.get_accounts()
-        client.session_id += NO_OUTSTANDING_SESSION_ID_SUFFIX
+        if client.session_id is not None:
+            client.session_id += NO_OUTSTANDING_SESSION_ID_SUFFIX
         bill_info = await client.get_bill_info(accounts[0])
         assert bill_info is not None
         assert bill_info.total_outstanding is not None

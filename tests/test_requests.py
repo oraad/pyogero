@@ -9,7 +9,6 @@ It needs at least one user in the "users" field. eg:
 }
 """
 
-from typing import List
 import pytest
 import requests
 from ogero import Ogero
@@ -23,7 +22,7 @@ if CONFIG is None or len(CONFIG.users) == 0:
 
 
 @pytest.fixture(name="clients", scope="session")
-def userfactory() -> List[Ogero]:
+def userfactory() -> list[Ogero]:
     """API factory"""
     session = requests.Session()
     return [
@@ -37,7 +36,7 @@ def test_missing_credentials():
         Ogero("", "")
 
 
-def test_login(clients: List[Ogero]):
+def test_login(clients: list[Ogero]):
     for client in clients:
         result = client.login()
         assert result == True
@@ -51,7 +50,7 @@ def test_failed_login():
             client.login()
 
 
-def test_get_accounts(clients: List[Ogero]):
+def test_get_accounts(clients: list[Ogero]):
     for client in clients:
         client.login()
         accounts = client.get_accounts()
@@ -59,7 +58,7 @@ def test_get_accounts(clients: List[Ogero]):
         assert len(accounts) >= 1
 
 
-def test_get_consumption_info(clients: List[Ogero]):
+def test_get_consumption_info(clients: list[Ogero]):
     for client in clients:
 
         client.login()
@@ -69,7 +68,7 @@ def test_get_consumption_info(clients: List[Ogero]):
         assert consumption_info is not None
 
 
-def test_get_bill_info(clients: List[Ogero]):
+def test_get_bill_info(clients: list[Ogero]):
     for client in clients:
         client.login()
         accounts = client.get_accounts()
@@ -79,7 +78,7 @@ def test_get_bill_info(clients: List[Ogero]):
         assert len(bill_info.bills) >= 1
 
 
-def test_relogin(clients: List[Ogero]):
+def test_relogin(clients: list[Ogero]):
     for client in clients:
         client.session_id = "123"
         accounts = client.get_accounts()
@@ -87,7 +86,7 @@ def test_relogin(clients: List[Ogero]):
         assert len(accounts) >= 1
 
 
-def test_fail_relogin(clients: List[Ogero]):
+def test_fail_relogin(clients: list[Ogero]):
     with requests.Session() as session:
         client = Ogero("user", "pass", session=session)
         client.session_id = "123"

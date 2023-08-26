@@ -2,7 +2,7 @@
 
 import logging
 import sys
-from typing import List, Optional
+from typing import Optional
 
 from ..types import Account, BillInfo, ConsumptionInfo, ErrorResponse, LoginResponse
 from ..utils import (
@@ -11,7 +11,7 @@ from ..utils import (
     parse_consumption_info,
     parse_error_message,
 )
-from ..const import API_ENDPOINTS, DefaultHeaders, default_headers
+from ..const import API_ENDPOINTS, Headers, default_headers
 from ..exceptions import AuthenticationException
 
 try:
@@ -78,7 +78,7 @@ class Ogero:
 
         return True
 
-    async def get_accounts(self, account: Account = None) -> List[Account]:
+    async def get_accounts(self, account: Optional[Account] = None) -> list[Account]:
         """Get user phone/internet accounts"""
 
         url = API_ENDPOINTS["dashboard"]
@@ -93,7 +93,7 @@ class Ogero:
 
         return accounts
 
-    async def get_bill_info(self, account: Account = None) -> BillInfo:
+    async def get_bill_info(self, account: Optional[Account] = None) -> BillInfo:
         """Get bill info for phone account
         ```
         @param account: Account - Phone/Internet account
@@ -112,7 +112,7 @@ class Ogero:
 
         return bill_info
 
-    async def get_consumption_info(self, account: Account = None) -> ConsumptionInfo:
+    async def get_consumption_info(self, account: Optional[Account] = None) -> ConsumptionInfo:
         """Get consumption info for internet account
         ```
         @param account: Account - Phone/Internet account
@@ -134,14 +134,14 @@ class Ogero:
     async def request_get(
         self,
         url: str,
-        account: Account = None,
-        headers: DefaultHeaders = default_headers(),
+        account: Optional[Account] = None,
+        headers: Headers = default_headers(),
     ):
         """Send get request and check if session is active
         ```
         @param url: str - Endpoint url
         @param account: Account - Phone/Internet account
-        @param headers: DefaultHeaders
+        @param headers: Headers
         ```
         """
         if self.session_id is None:
@@ -161,7 +161,7 @@ class Ogero:
 
         return response
 
-    def _get_params(self, account: Account = None):
+    def _get_params(self, account: Optional[Account] = None):
 
         if self.session_id is None:
             raise AuthenticationException("Login first")

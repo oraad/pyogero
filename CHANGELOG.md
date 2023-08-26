@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0
+
+- Update minimum python to 3.10
+- Upgrade `requests` to 2.31.0
+- Upgrade `beautifulsoup4` to 4.12.2
+- Upgrade `aiohttp` to 3.8.5
+- Upgrade `pydantic` to 1.10.12
+- Fix typing issues
+
 ## 0.2.0
 
 - Upgrade `aiohttp` to 3.8.3

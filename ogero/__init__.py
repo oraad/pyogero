@@ -1,7 +1,7 @@
 """A class for interacting with Ogero APIs"""
 import logging
-from typing import List, Optional
-from ogero.const import API_ENDPOINTS, DefaultHeaders, default_headers
+from typing import Optional
+from ogero.const import API_ENDPOINTS, Headers, default_headers
 from ogero.types import Account, BillInfo, ConsumptionInfo, ErrorResponse, LoginResponse
 from ogero.utils import (
     parse_accounts,
@@ -16,6 +16,12 @@ from .exceptions import AuthenticationException
 
 class Ogero:
     """A class for interacting with Ogero APIs"""
+
+    username: Optional[str]
+    password: Optional[str]
+    debug: bool
+    logger: logging.Logger
+    session_id: Optional[str]
 
     def __init__(
         self,
@@ -70,7 +76,7 @@ class Ogero:
 
         return True
 
-    def get_accounts(self) -> List[Account]:
+    def get_accounts(self) -> list[Account]:
         """Get user phone/internet accounts"""
 
         url = API_ENDPOINTS["dashboard"]
@@ -84,7 +90,7 @@ class Ogero:
 
         return accounts
 
-    def get_bill_info(self, account: Account = None) -> BillInfo:
+    def get_bill_info(self, account: Optional[Account] = None) -> BillInfo:
         """Get bill info for phone account
         ```
         @param account: Account - Phone/Internet account
@@ -102,7 +108,7 @@ class Ogero:
 
         return bill_info
 
-    def get_consumption_info(self, account: Account = None) -> ConsumptionInfo:
+    def get_consumption_info(self, account: Optional[Account] = None) -> ConsumptionInfo:
         """Get consumption info for internet account
         ```
         @param account: Account - Phone/Internet account
@@ -123,14 +129,14 @@ class Ogero:
     def request_get(
         self,
         url: str,
-        account: Account = None,
-        headers: DefaultHeaders = default_headers(),
+        account: Optional[Account] = None,
+        headers: Headers = default_headers(),
     ):
         """Send get request and check if session is active
         ```
         @param url: str - Endpoint url
         @param account: Account - Phone/Internet account
-        @param headers: DefaultHeaders
+        @param headers: Headers
         ```
         """
         if self.session_id is None:
@@ -151,7 +157,7 @@ class Ogero:
         self.handle_response_fail(response)
         return response
 
-    def _get_params(self, account: Account = None):
+    def _get_params(self, account: Optional[Account] = None):
         """Generate URL required params
         ```
         @param account: Account - Phone/Internet account
@@ -181,7 +187,7 @@ class Ogero:
         )
         if (
             response.status_code == 400
-            and "application/json" in response.headers.get("content-type")
+            and "application/json" in response.headers.get("content-type", default='')
         ):
             resp: ErrorResponse = response.json()
             msg = resp["error"]["message"]
@@ -190,7 +196,7 @@ class Ogero:
 
         if (
             response.status_code == 200
-            and "text/html" in response.headers.get("content-type")
+            and "text/html" in response.headers.get("content-type", default='')
         ):
             content = response.content
             msg = parse_error_message(content)

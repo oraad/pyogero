@@ -1,7 +1,8 @@
 import pytest
-import requests
-import requests_mock
-from requests_mock import Mocker
+from requests import Session
+from requests_mock.request import _RequestObjectProxy as Request
+from requests_mock.response import _Context as Context
+from requests_mock.mocker import Mocker
 from urllib.parse import parse_qs
 from ogero import Ogero
 from ogero.const import API_ENDPOINTS
@@ -18,8 +19,11 @@ from .mock_data import (
     unauthorized_response,
 )
 
-def login_callback(request: requests.Request, context: requests.Response):
+def login_callback(request: Request, context: Context):
+
+    t = type(request)
     data_dict = parse_qs(request.text)
+
     username = data_dict["Username"][0]
     password = data_dict["Password"][0]
 
@@ -35,7 +39,7 @@ def login_callback(request: requests.Request, context: requests.Response):
         return mock_data
 
 
-def dashboard_callback(request: requests.Request, context: requests.Response):
+def dashboard_callback(request: Request, context: Context):
 
     data_dict = request.qs
 
@@ -51,7 +55,7 @@ def dashboard_callback(request: requests.Request, context: requests.Response):
         context.headers = headers
         return mock_data
 
-def bill_callback(request: requests.Request, context: requests.Response):
+def bill_callback(request: Request, context: Context):
 
     data_dict = request.qs
 
@@ -72,7 +76,7 @@ def bill_callback(request: requests.Request, context: requests.Response):
         context.headers = headers
         return mock_data
 
-def consumption_callback(request: requests.Request, context: requests.Response):
+def consumption_callback(request: Request, context: Context):
 
     data_dict = request.qs
 
@@ -91,7 +95,7 @@ def consumption_callback(request: requests.Request, context: requests.Response):
 
 @pytest.fixture(name="requests_mock")
 def mock_response():
-    with requests_mock.Mocker() as mock:
+    with Mocker() as mock:
         mock.post(API_ENDPOINTS["login"], json=login_callback)
         mock.get(API_ENDPOINTS["dashboard"].split("?")[0], text=dashboard_callback)
         mock.get(API_ENDPOINTS["bill"].split("?")[0], text=bill_callback)
@@ -106,14 +110,14 @@ def test_missing_credentials():
 
 
 def test_login(requests_mock: Mocker):
-    with requests.Session() as session:
+    with Session() as session:
         client = Ogero("user", "pass", session=session)
         result = client.login()
         assert result == True
 
 
 def test_failed_login(requests_mock: Mocker):
-    with requests.Session() as session:
+    with Session() as session:
         client = Ogero("user", "wrongpass", session=session)
 
         with pytest.raises(AuthenticationException):
@@ -122,7 +126,7 @@ def test_failed_login(requests_mock: Mocker):
 
 def test_get_accounts(requests_mock: Mocker):
 
-    with requests.Session() as session:
+    with Session() as session:
         client = Ogero("user", "pass", session=session)
         client.login()
         accounts = client.get_accounts()
@@ -131,7 +135,7 @@ def test_get_accounts(requests_mock: Mocker):
 
 
 def test_get_consumption_info(requests_mock: Mocker):
-    with requests.Session() as session:
+    with Session() as session:
         client = Ogero("user", "pass", session=session)
 
         client.login()
@@ -142,7 +146,7 @@ def test_get_consumption_info(requests_mock: Mocker):
 
 
 def test_get_bill_info(requests_mock: Mocker):
-    with requests.Session() as session:
+    with Session() as session:
         client = Ogero("user", "pass", session=session)
         client.login()
         accounts = client.get_accounts()
@@ -152,18 +156,19 @@ def test_get_bill_info(requests_mock: Mocker):
         assert len(bill_info.bills) >= 1
 
 def test_get_bill_info_no_outstanding(requests_mock: Mocker):
-    with requests.Session() as session:
+    with Session() as session:
         client = Ogero("user", "pass", session=session)
         client.login()
         accounts = client.get_accounts()
-        client.session_id += NO_OUTSTANDING_SESSION_ID_SUFFIX
+        if client.session_id is not None:
+          client.session_id += NO_OUTSTANDING_SESSION_ID_SUFFIX
         bill_info = client.get_bill_info(accounts[0])
         assert bill_info is not None
         assert bill_info.total_outstanding is not None
         assert len(bill_info.bills) >= 1
 
 def test_relogin(requests_mock: Mocker):
-    with requests.Session() as session:
+    with Session() as session:
         client = Ogero("user", "pass", session=session)
         client.session_id = "123"
         accounts = client.get_accounts()
@@ -172,7 +177,7 @@ def test_relogin(requests_mock: Mocker):
 
 
 def test_fail_relogin(requests_mock: Mocker):
-    with requests.Session() as session:
+    with Session() as session:
         client = Ogero("user", "wrongpass", session=session)
         client.session_id = "123"
         with pytest.raises(AuthenticationException):
