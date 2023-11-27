@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyogero"
-version = "0.3.0"
+version = "0.4.0"
 description = "Ogero API module"
 authors = ["Omar Raad <omarraad@gmail.com>"]
 license = "MIT"
@@ -19,8 +19,6 @@ keywords = [
 classifiers = [
     "Development Status :: 4 - Beta",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "License :: OSI Approved :: MIT License",
@@ -35,10 +33,10 @@ packages = [
 "Issues" = "https://github.com/oraad/pyogero/issues/"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4"
+python = ">=3.10,<4"
 requests = "^2.31.0"
 beautifulsoup4 = "^4.12.2"
-aiohttp = "^3.9.1"
+aiohttp = ">=3.8.5"
 pydantic = "^1.10.13"
 
 
