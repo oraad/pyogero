@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.0
+
+- Refactor `ogero` module into `pyogero`
+
 ## 0.4.0
 
 - Downgrade `aiohttp` to >=3.8.5
