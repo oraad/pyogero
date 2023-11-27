@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyogero"
-version = "0.4.0"
+version = "0.5.0"
 description = "Ogero API module"
 authors = ["Omar Raad <omarraad@gmail.com>"]
 license = "MIT"
@@ -26,7 +26,7 @@ classifiers = [
 ]
 
 packages = [
-    { include = "ogero" }
+    { include = "pyogero" }
 ]
 
 [tool.poetry.urls]

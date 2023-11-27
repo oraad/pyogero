@@ -1,9 +1,9 @@
 """A class for interacting with Ogero APIs"""
 import logging
 from typing import List, Optional
-from ogero.const import API_ENDPOINTS, DefaultHeaders, default_headers
-from ogero.types import Account, BillInfo, ConsumptionInfo, ErrorResponse, LoginResponse
-from ogero.utils import (
+from pyogero.const import API_ENDPOINTS, DefaultHeaders, default_headers
+from pyogero.types import Account, BillInfo, ConsumptionInfo, ErrorResponse, LoginResponse
+from pyogero.utils import (
     parse_accounts,
     parse_bills,
     parse_consumption_info,
