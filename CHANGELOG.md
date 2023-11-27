@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0
+
+- Downgrade `aiohttp` to >=3.8.5
+- Remove support for Python 3.8 and 3.9
+
 ## 0.3.0
 
 - Update `requests` to 2.31.0
