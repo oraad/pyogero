@@ -12,9 +12,9 @@ It needs at least one user in the "users" field. eg:
 from typing import List
 import pytest
 import aiohttp
-from ogero.asyncio import Ogero
-from ogero.types import ConfigUser
-from ogero.exceptions import AuthenticationException
+from pyogero.asyncio import Ogero
+from pyogero.types import ConfigUser
+from pyogero.exceptions import AuthenticationException
 
 from .test_utils import configloader
 

@@ -12,8 +12,8 @@ It needs at least one user in the "users" field. eg:
 from typing import List
 import pytest
 import requests
-from ogero import Ogero
-from ogero.exceptions import AuthenticationException
+from pyogero import Ogero
+from pyogero.exceptions import AuthenticationException
 
 from .test_utils import configloader
 

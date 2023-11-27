@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from ogero.types import LoginResponse, ErrorResponse
+from pyogero.types import LoginResponse, ErrorResponse
 
 json_headers = {"content-type": "application/json"}
 html_headers = {"content-type": "text/html"}

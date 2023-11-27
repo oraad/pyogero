@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from ogero.types import OgeroConfigFile
+from pyogero.types import OgeroConfigFile
 
 def configloader() -> OgeroConfigFile:
     """ loads config """

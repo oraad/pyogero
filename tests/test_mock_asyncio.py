@@ -5,10 +5,10 @@ import aiohttp
 from aioresponses import aioresponses, CallbackResult
 from aioresponses.compat import URL
 
-from ogero.asyncio import Ogero
-from ogero.const import API_ENDPOINTS
-from ogero.types import ConfigUser
-from ogero.exceptions import AuthenticationException
+from pyogero.asyncio import Ogero
+from pyogero.const import API_ENDPOINTS
+from pyogero.types import ConfigUser
+from pyogero.exceptions import AuthenticationException
 from tests.const import NO_OUTSTANDING_SESSION_ID_SUFFIX
 
 from .mock_data import (
