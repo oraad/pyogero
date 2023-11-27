@@ -1,4 +1,7 @@
 # Changelog
+## 0.5.1
+
+- Fix tests pyogero import
 
 ## 0.5.0
 
