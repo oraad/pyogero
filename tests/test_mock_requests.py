@@ -3,9 +3,9 @@ import requests
 import requests_mock
 from requests_mock import Mocker
 from urllib.parse import parse_qs
-from ogero import Ogero
-from ogero.const import API_ENDPOINTS
-from ogero.exceptions import AuthenticationException
+from pyogero import Ogero
+from pyogero.const import API_ENDPOINTS
+from pyogero.exceptions import AuthenticationException
 from tests.const import NO_OUTSTANDING_SESSION_ID_SUFFIX
 from .mock_data import (
     MOCK_SESSION_ID,
