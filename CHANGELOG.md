@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0
+
+- Update `requests` to 2.31.0
+- Update `beautifulsoup4` to 4.12.2
+- Update `aiohttp` to 3.9.1
+- Update `pydantic` to 1.10.13
+- Update dev-dependency `pytest` to 7.4.3
+- Update dev-dependency `black` to 22.12.0
+- Update dev-dependency `requests-mock` to 1.11.0
+- Add support for Python 3.11
+
 ## 0.2.0
 
 - Upgrade `aiohttp` to 3.8.3
