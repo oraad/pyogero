@@ -11,6 +11,7 @@ from .const import (
     QUOTA,
     TOTAL_CONSUMPTION,
     UPLOAD,
+    LEBANON_TIMEZONE
 )
 from .types import (
     Account,
@@ -21,7 +22,6 @@ from .types import (
     Content,
     ConsumptionInfo,
 )
-
 
 def __parse_status_value(str_val: str):
     val = str_val.split()[0]
@@ -92,7 +92,7 @@ def parse_consumption_info(content: Content) -> ConsumptionInfo:
         elif key == EXTRA_CONSUMPTION:
             info.extra_consumption = __parse_status_value(value)
         elif key == LAST_UPDATE:
-            info.last_update = datetime.strptime(value, "%B %d,%Y  %H:%M")
+            info.last_update = datetime.strptime(value, "%B %d,%Y  %H:%M").replace(tzinfo=LEBANON_TIMEZONE)
 
     return info
 

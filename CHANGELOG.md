@@ -1,4 +1,9 @@
 # Changelog
+
+## 0.6.0
+
+- Add timezone info to last_update
+
 ## 0.5.1
 
 - Fix tests pyogero import
