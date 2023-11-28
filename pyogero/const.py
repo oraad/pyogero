@@ -1,6 +1,7 @@
 """ constants """
 
 from typing import TypedDict
+from zoneinfo import ZoneInfo
 
 BASEURL = {
     "api": "https://ogero.gov.lb/API",
@@ -45,3 +46,5 @@ DOWNLOAD = "Download"
 TOTAL_CONSUMPTION = "Total Consumption"
 EXTRA_CONSUMPTION = "Extra Consumption"
 LAST_UPDATE = "Consumption Until"
+
+LEBANON_TIMEZONE = ZoneInfo('Asia/Beirut')
