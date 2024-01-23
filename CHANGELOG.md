@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.2
+
+- Fix certificate resource location and access
+
 ## 0.8.1
 
 - Revert conflicting dependencies
