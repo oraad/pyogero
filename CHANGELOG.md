@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.1
+
+- Revert conflicting dependencies
+
 ## 0.8.0
 
 - Update dependecies
