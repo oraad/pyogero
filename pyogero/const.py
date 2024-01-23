@@ -1,5 +1,5 @@
 """ constants """
-
+from pathlib import Path
 from typing import TypedDict
 from zoneinfo import ZoneInfo
 
@@ -7,6 +7,8 @@ BASEURL = {
     "api": "https://ogero.gov.lb/API",
     "myogero": "https://ogero.gov.lb/myogero",
 }
+
+CERT_PATH = Path(__package__, 'assets/ogero.pem')
 
 
 DefaultHeaders = TypedDict(

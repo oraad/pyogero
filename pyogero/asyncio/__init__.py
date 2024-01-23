@@ -3,6 +3,7 @@
 import logging
 import sys
 from typing import List, Optional
+import ssl
 
 from ..types import Account, BillInfo, ConsumptionInfo, ErrorResponse, LoginResponse
 from ..utils import (
@@ -11,12 +12,12 @@ from ..utils import (
     parse_consumption_info,
     parse_error_message,
 )
-from ..const import API_ENDPOINTS, DefaultHeaders, default_headers
+from ..const import API_ENDPOINTS, CERT_PATH, DefaultHeaders, default_headers
 from ..exceptions import AuthenticationException
 
 try:
     import aiohttp
-    from aiohttp.client import ClientResponse
+    from aiohttp.client import ClientSession, ClientResponse, TCPConnector
 except ImportError as error_message:
     print(f"Failed to import aiohttp, bailing: {error_message}", file=sys.stderr)
     sys.exit(1)
@@ -29,7 +30,7 @@ class Ogero:
         self,
         username: str,
         password: str,
-        session: Optional[aiohttp.client.ClientSession] = None,
+        session: Optional[ClientSession] = None,
         debug: bool = False,
         logger: logging.Logger = logging.getLogger(),
     ):
@@ -54,9 +55,12 @@ class Ogero:
         self.session_id = None
 
         if not session:
-            self.session = aiohttp.ClientSession()
+            self.session = ClientSession()
         else:
             self.session = session
+
+        self.ssl_context = ssl.create_default_context(cafile=CERT_PATH)
+
 
     async def login(self):
         """Logs into the account and caches the session id."""
@@ -66,7 +70,7 @@ class Ogero:
         headers = default_headers()
         payload = {"Username": self.username, "Password": self.password}
 
-        async with self.session.post(url, headers=headers, data=payload) as response:
+        async with self.session.post(url, headers=headers, data=payload, ssl=self.ssl_context) as response:
             self.session_id = None
             await self.handle_response_fail(response)
             jsondata: LoginResponse = await response.json()
@@ -136,6 +140,7 @@ class Ogero:
         url: str,
         account: Account = None,
         headers: DefaultHeaders = default_headers(),
+        max_retries: int = 1
     ):
         """Send get request and check if session is active
         ```
@@ -144,20 +149,21 @@ class Ogero:
         @param headers: DefaultHeaders
         ```
         """
+        if max_retries < 0:
+            return None
+        
         if self.session_id is None:
             await self.login()
 
         try:
             params = self._get_params(account)
             formatted_url = url.format_map(params)
-            response = await self.session.get(formatted_url, headers=headers)
+            response = await self.session.get(formatted_url, headers=headers, ssl=self.ssl_context)
             await self.handle_response_fail(response)
         except AuthenticationException as ex:
             self.logger.debug(f"AuthenticationException: {ex}")
             await self.login()
-            params = self._get_params(account)
-            formatted_url = url.format_map(params)
-            response = await self.session.get(formatted_url, headers=headers)
+            response = await self.request_get(url, account, headers, max_retries - 1)
 
         return response
 

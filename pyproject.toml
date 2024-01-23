@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyogero"
-version = "0.7.0"
+version = "0.8.0"
 description = "Ogero API module"
 authors = ["Omar Raad <omarraad@gmail.com>"]
 license = "MIT"
@@ -30,23 +30,25 @@ packages = [
     { include = "pyogero" }
 ]
 
+
 [tool.poetry.urls]
 "Issues" = "https://github.com/oraad/pyogero/issues/"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4"
 requests = ">=2.31.0"
-beautifulsoup4 = ">=4.12.2"
-aiohttp = ">=3.8.5"
-pydantic = ">=1.10.12"
+beautifulsoup4 = ">=4.12.3"
+aiohttp = ">=3.9.1"
+pydantic = ">=2.5.3"
 
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.4.3"
-black = "^22.12.0"
-pytest-asyncio = ">=0.19,<0.22"
+pytest = "^7.4.4"
+black = "^23.12.1"
+pytest-asyncio = ">=0.23.3"
 requests-mock = "^1.11.0"
 aioresponses = "^0.7.3"
+ipykernel = "^6.29.0"
 
 [tool.pytest.ini_options]
 asyncio_mode = "strict"

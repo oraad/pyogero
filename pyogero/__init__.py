@@ -1,18 +1,18 @@
 """A class for interacting with Ogero APIs"""
 import logging
+import requests
 from typing import List, Optional
-from pyogero.const import API_ENDPOINTS, DefaultHeaders, default_headers
-from pyogero.types import Account, BillInfo, ConsumptionInfo, ErrorResponse, LoginResponse
-from pyogero.utils import (
+
+from .const import API_ENDPOINTS, CERT_PATH, DefaultHeaders, default_headers
+from .types import Account, BillInfo, ConsumptionInfo, ErrorResponse, LoginResponse
+from .utils import (
     parse_accounts,
     parse_bills,
     parse_consumption_info,
     parse_error_message,
 )
-import requests
 
 from .exceptions import AuthenticationException
-
 
 class Ogero:
     """A class for interacting with Ogero APIs"""
@@ -49,6 +49,8 @@ class Ogero:
             self.session = requests.Session()
         else:
             self.session = session
+
+        self.session.verify = CERT_PATH
 
     def login(self):
         """Logs into the account and caches the session id."""
@@ -125,6 +127,7 @@ class Ogero:
         url: str,
         account: Account = None,
         headers: DefaultHeaders = default_headers(),
+        max_retries: int = 1
     ):
         """Send get request and check if session is active
         ```
@@ -133,6 +136,10 @@ class Ogero:
         @param headers: DefaultHeaders
         ```
         """
+
+        if max_retries < 0:
+            return None
+        
         if self.session_id is None:
             self.login()
 
@@ -144,11 +151,8 @@ class Ogero:
         except AuthenticationException as ex:
             self.logger.debug(f"AuthenticationException: {ex}")
             self.login()
-            params = self._get_params(account)
-            formatted_url = url.format_map(params)
-            response = self.session.get(formatted_url, headers=headers)
+            response = self.request_get(url, account, headers, max_retries - 1)
 
-        self.handle_response_fail(response)
         return response
 
     def _get_params(self, account: Account = None):

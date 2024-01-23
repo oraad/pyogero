@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.0
+
+- Update dependecies
+- Add Ogero and RapidSSL intermediate certificate for verification
+
+## 0.7.0
+
+- Fix dependency version to support home-assistant
+
 ## 0.6.0
 
 - Add timezone info to last_update
