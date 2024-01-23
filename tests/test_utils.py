@@ -15,8 +15,8 @@ def configloader() -> OgeroConfigFile:
         print("filename", filepath)
         if filepath.exists():
             try:
-                configfile = OgeroConfigFile.parse_file(filepath)
-                return configfile
+                with open(filepath, 'r') as f:
+                    return OgeroConfigFile.model_validate_json(f.read())
             except json.JSONDecodeError as json_error:
                 pytest.exit(f"Failed to parse config file: {json_error}")
     return OgeroConfigFile()
