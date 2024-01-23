@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyogero"
-version = "0.8.0"
+version = "0.8.1"
 description = "Ogero API module"
 authors = ["Omar Raad <omarraad@gmail.com>"]
 license = "MIT"
@@ -38,8 +38,8 @@ packages = [
 python = ">=3.10,<4"
 requests = ">=2.31.0"
 beautifulsoup4 = ">=4.12.3"
-aiohttp = ">=3.9.1"
-pydantic = ">=2.5.3"
+aiohttp = ">=3.8.5"
+pydantic = ">=1.10.12"
 
 
 [tool.poetry.group.dev.dependencies]
