@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyogero"
-version = "0.9.0"
+version = "0.10.0"
 description = "Ogero API module"
 authors = ["Omar Raad <omarraad@gmail.com>"]
 license = "MIT"
@@ -22,6 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]

@@ -15,11 +15,11 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.12"
       - name: Setup Poetry
         uses: abatilo/actions-poetry@v2
         with:
-          poetry-version: "1.7.1"
+          poetry-version: "1.8.2"
       - name: Get version
         id: version
         run: echo "::set-output name=VERSION::v$(poetry version | awk '{ print $2 }')"
