@@ -80,51 +80,51 @@ def dashboard_response():
     return data, HTTPStatus.OK, html_headers
 
 def consumption_response():
+  
   data: str = """
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title>Ogero - My Consumption</title>
-    <link rel="icon" type="image/png" href="https://ogero.gov.lb/img/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="https://ogero.gov.lb/img/favicon-16x16.png" sizes="16x16" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  </head>
-  <body>
-    <div id="fb-root"></div>
-    <div class="MyOgeroDashboardContainer">
-      <div class="MyOgeroDashboard" data-aos="fade-right">
-        <div class="BillNumberChange" data-aos="fade-right" data-aos-delay="0">
-          <div class="MyOgeroDashboardSection2NumberChangeContainer">
-            <div class="MyOgeroDashboardSection2NumberChange">
-              <div>Internet Account</div>
-              <select name="changnumber">
-                <option value="L454714" selected>Lxxxxxx [ Phone #: xx xxxxxx ] </option>
-              </select>
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-              <a class="BackgroundGradient"></a>
+    <head>
+        <title>Ogero - My Consumption</title>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+
+        <div class="MyOgeroDashboardContainer">
+            <div class="MyOgeroDashboard" data-aos="fade-right">
+                <div class="BillNumberChange" data-aos="fade-right" data-aos-delay="0">
+                <div class="MyOgeroDashboardSection2NumberChangeContainer">
+                    <div class="MyOgeroDashboardSection2NumberChange">
+                    <div>Internet Account</div>
+                    <select name="changnumber">
+                        <option value="Lxxxxxx" selected>Lxxxxxx / xx xxxxxx </option>
+                    </select>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                </div>
             </div>
-          </div>
         </div>
+
         <div class="MyOgeroDashboardSection3" data-aos="fade-right" data-aos-delay="200">
-          <div class="MyOgeroDashboardSection1Name">My Consumption</div>
-          <div class="sep"></div>
-          <div class="MyConsumptionRight"></div>
-          <div class="MyConsumptionLeft">
-            <div class="MyConsumptionGrid"><span>Connection Speed</span><span> <= 50 Mbps </span></div>
-            <div class="MyConsumptionGrid"><span>Quota</span><span>Unlimited GB</span></div>
-            <div class="MyConsumptionGrid"><span>Upload</span><span> 12.0 GB</span></div>
-            <div class="MyConsumptionGrid"><span>Download</span><span> 143.4 GB</span></div>
-            <div class="MyConsumptionGrid"><span>Total Consumption</span><span> 155.4 GB</span></div>
-            <div class="MyConsumptionGrid"><span>Extra Consumption</span><span>0</span></div>
-            <div class="MyConsumptionGrid"><span>Consumption Until</span><span>SEPTEMBER 15,2022 17:03</span></div>
-          </div>
+            <div class="MyOgeroDashboardSection1Name">Lxxxxxx / xxxxxxxx</div>
+            <div class="sep"></div>
+            <div class="MyConsumptionRight"></div>
+
+            <div class="MyConsumptionLeft">
+                <!-- <div class="MyConsumptionGrid"><span>Account</span><span>Lxxxxxx / xxxxxxxx</span></div> -->
+                <div class="MyConsumptionGrid"><span>Current Bundle</span><span>up to 50Mbps (FUP)</span></div>
+                <div class="MyConsumptionGrid"><span>Total Quota</span><span>800 GB FUP</span></div>
+                <!-- <div class="MyConsumptionGrid"><span>Upload</span><span></span></div>
+                <div class="MyConsumptionGrid"><span>Download</span><span></span></div> -->
+                <div class="MyConsumptionGrid"><span>Total Consumption</span><span>499 GB</span></div>
+                <div class="MyConsumptionGrid"><span>Extra Consumption</span><span>0 GB</span></div>
+                <div class="MyConsumptionGrid"><span>Consumption Until</span><span>25/06/2024 21:17</span></div>
+            </div>
+                
         </div>
-      </div>
-    </div>
-  </body>
+    </body>
 </html>
-  """
+"""
+
   return data, HTTPStatus.OK, html_headers
 
 def bill_response():
