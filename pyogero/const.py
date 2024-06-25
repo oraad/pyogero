@@ -1,5 +1,5 @@
 """ constants """
-from importlib import resources
+from importlib.resources import files, as_file
 from typing import TypedDict
 from zoneinfo import ZoneInfo
 
@@ -8,9 +8,11 @@ BASEURL = {
     "myogero": "https://ogero.gov.lb/myogero",
 }
 
+package = 'pyogero.resources'
+resource = 'ogero.pem'
 
-with resources.path('pyogero.resources','ogero.pem') as path:
-    CERT_PATH = path
+with as_file(files(package).joinpath(resource)) as file:
+    CERT_PATH = file
 
 
 DefaultHeaders = TypedDict(
@@ -43,8 +45,8 @@ API_ENDPOINTS = {
     "consumption": f'{BASEURL["myogero"]}/consumption.php?SessionID={{session_id}}&Username={{username}}&AppRequest&dsl={{internet_account}}',
 }
 
-CONNECTION_SPEED = "Connection Speed"
-QUOTA = "Quota"
+CONNECTION_SPEED = "Current Bundle"
+QUOTA = "Total Quota"
 UPLOAD = "Upload"
 DOWNLOAD = "Download"
 TOTAL_CONSUMPTION = "Total Consumption"

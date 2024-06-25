@@ -92,7 +92,7 @@ def parse_consumption_info(content: Content) -> ConsumptionInfo:
         elif key == EXTRA_CONSUMPTION:
             info.extra_consumption = __parse_status_value(value)
         elif key == LAST_UPDATE:
-            info.last_update = datetime.strptime(value, "%B %d,%Y  %H:%M").replace(tzinfo=LEBANON_TIMEZONE)
+            info.last_update = datetime.strptime(value, "%d/%m/%Y %H:%M").replace(tzinfo=LEBANON_TIMEZONE)
 
     return info
 
