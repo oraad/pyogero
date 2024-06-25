@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyogero"
-version = "0.8.2"
+version = "0.9.0"
 description = "Ogero API module"
 authors = ["Omar Raad <omarraad@gmail.com>"]
 license = "MIT"
