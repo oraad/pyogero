@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.0
+
+- Fix parser to match new webpage layout
+- Update dependencies
+
 ## 0.8.2
 
 - Fix certificate resource location and access
