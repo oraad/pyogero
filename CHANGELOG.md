@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.1
+
+- Revert pydantic to 1.10.15
+
 ## 0.10.0
 
 - Upgrade to python 3.12
