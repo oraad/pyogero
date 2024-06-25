@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.0
+
+- Upgrade to python 3.12
+
 ## 0.9.0
 
 - Fix parser to match new webpage layout
