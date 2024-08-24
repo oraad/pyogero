@@ -15,8 +15,6 @@ keywords = ["ogero", "internet", "api", "lebanon"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
@@ -29,7 +27,7 @@ packages = [{ include = "pyogero" }]
 "Issues" = "https://github.com/oraad/pyogero/issues/"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4"
+python = ">=3.12,<4"
 requests = ">=2.32.3"
 beautifulsoup4 = ">=4.12.3"
 aiohttp = ">=3.10.3"
@@ -38,7 +36,6 @@ pydantic = ">=1.10.17"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.4"
-black = "^23.12.1"
 pytest-asyncio = ">=0.23.8"
 requests-mock = "^1.12.1"
 aioresponses = "^0.7.3"
