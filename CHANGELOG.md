@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.2
+
+- Upgrade pydantic to 1.10.17
+- Upgrade aiohttp to 3.10.3
+- Disable passing server certificate to client
+- Use find_spec to check for module instead of try import
+- Improve typing
+- Add doc_string
+
 ## 0.10.1
 
 - Revert pydantic to 1.10.15
