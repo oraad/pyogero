@@ -1,4 +1,4 @@
-""" exceptions for the Ogero module """
+"""exceptions for the Ogero module."""
 
 class AuthenticationException(BaseException):
-    """authentication error for Ogero"""
+    """authentication error for Ogero."""

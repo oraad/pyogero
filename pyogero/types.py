@@ -1,13 +1,12 @@
-""" types """
+"""types."""
 
 from datetime import datetime
 from enum import Enum
-from locale import currency
-import locale
-from typing import List, Optional, TypedDict, Union
+from typing import TypedDict
+
 from pydantic import BaseModel
 
-Content = Union[bytes, str]
+Content = bytes | str
 
 
 class Account:
@@ -31,10 +30,7 @@ class BillAmount:
     amount: float
     currency: str
 
-    def __init__(
-        self, amount: Optional[float] = 0, currency: Optional[str] = "LBP"
-    ) -> None:
-
+    def __init__(self, amount: float = 0, currency: str = "LBP") -> None:
         self.amount = amount
         self.currency = currency
 
@@ -43,13 +39,13 @@ class BillAmount:
 
     @staticmethod
     def parse(str_val: str):
-        amount, currency = str_val.split(" ")
+        amount, _currency = str_val.split(" ")
         amount = float(amount.replace(",", ""))
 
-        return BillAmount(amount, currency)
+        return BillAmount(amount, _currency)
 
     def __str__(self) -> str:
-        return f"{str(self.amount)} {self.currency}"
+        return f"{self.amount!s} {self.currency}"
 
     def __repr__(self) -> str:
         return self.__str__()
@@ -76,7 +72,7 @@ class Bill:
 
 class BillInfo:
     total_outstanding: BillAmount
-    bills: List[Bill] = []
+    bills: list[Bill] = []
 
     def __str__(self) -> str:
         return f"Total outstanding: {self.total_outstanding}"
@@ -102,7 +98,8 @@ class ConsumptionInfo:
 
 
 class ErrorResponseContent(TypedDict):
-    code: Union[int, str]
+    code: int | str
+    message: str
 
 
 class ErrorResponse(TypedDict):
@@ -119,6 +116,6 @@ class ConfigUser(BaseModel):
 
 
 class OgeroConfigFile(BaseModel):
-    """config file definition"""
+    """config file definition."""
 
-    users: List[ConfigUser]
+    users: list[ConfigUser] | None = None

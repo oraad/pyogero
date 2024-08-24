@@ -1,30 +1,41 @@
+"""Mock data."""
+
 from http import HTTPStatus
-from pyogero.types import LoginResponse, ErrorResponse
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from pyogero.types import ErrorResponse, LoginResponse
 
 json_headers = {"content-type": "application/json"}
 html_headers = {"content-type": "text/html"}
 
 MOCK_SESSION_ID = "session_id1"
 
+type MockDataResponse = tuple[LoginResponse | ErrorResponse | str, HTTPStatus, Any]
 
-def successful_login_response():
+
+def successful_login_response() -> MockDataResponse:
+    """Successful Login Response."""
     data: LoginResponse = {"SessionID": MOCK_SESSION_ID}
     return data, HTTPStatus.OK, json_headers
 
 
-def failed_login_response():
+def failed_login_response() -> MockDataResponse:
+    """Failed login response."""
     data: ErrorResponse = {
         "error": {"code": "2002", "message": "Wrong username/password combination"}
     }
     return data, HTTPStatus.BAD_REQUEST, json_headers
 
 
-def unauthorized_response():
+def unauthorized_response() -> MockDataResponse:
+    """Unauthorized response."""
     data: str = '<script language="javascript">window.location="login.logout.php?error=You are required to login to access this section";</script>'
     return data, HTTPStatus.OK, html_headers
 
 
-def dashboard_response():
+def dashboard_response() -> MockDataResponse:
+    """Dashboard response."""
     data: str = """
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -79,9 +90,10 @@ def dashboard_response():
     """
     return data, HTTPStatus.OK, html_headers
 
-def consumption_response():
-  
-  data: str = """
+
+def consumption_response() -> MockDataResponse:
+    """Consumption response."""
+    data: str = """
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -119,16 +131,18 @@ def consumption_response():
                 <div class="MyConsumptionGrid"><span>Extra Consumption</span><span>0 GB</span></div>
                 <div class="MyConsumptionGrid"><span>Consumption Until</span><span>25/06/2024 21:17</span></div>
             </div>
-                
+
         </div>
     </body>
 </html>
 """
 
-  return data, HTTPStatus.OK, html_headers
+    return data, HTTPStatus.OK, html_headers
 
-def bill_response():
-  data: str = """
+
+def bill_response() -> MockDataResponse:
+    """Bill response."""
+    data: str = """
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -363,10 +377,12 @@ def bill_response():
 
 </html>
   """
-  return data, HTTPStatus.OK, html_headers
+    return data, HTTPStatus.OK, html_headers
 
-def bill_response_no_outstanding_bill():
-  data: str = """
+
+def bill_response_no_outstanding_bill() -> MockDataResponse:
+    """Bill response no outstanding bill."""
+    data: str = """
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -590,4 +606,4 @@ def bill_response_no_outstanding_bill():
 
 </html>
   """
-  return data, HTTPStatus.OK, html_headers
+    return data, HTTPStatus.OK, html_headers
