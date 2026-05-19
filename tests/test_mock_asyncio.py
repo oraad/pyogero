@@ -3,6 +3,7 @@
 import re
 from collections.abc import Generator
 from typing import Any
+from unittest.mock import MagicMock
 
 import aiohttp
 import pytest
@@ -32,7 +33,7 @@ def login_callback(url: URL, **kwargs: dict[str, Any]) -> CallbackResult:
     username = data_dict["Username"]
     password = data_dict["Password"]
 
-    if username == "user" and password == "pass":  # noqa: S105
+    if username == "user" and password == "pass":
         mock_data, status_code, headers = successful_login_response()
         callback_result = CallbackResult(
             status=status_code, headers=headers, payload=mock_data
@@ -125,14 +126,13 @@ def mock_aioresponse() -> Generator[aioresponses, Any, None]:
         yield mock
 
 
-@pytest.mark.asyncio()
 def test_missing_credentials(aio_mock: aioresponses) -> None:
     """Test missing credentials."""
     with pytest.raises(AuthenticationException):
-        Ogero("", "")
+        Ogero("", "", session=MagicMock())
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_login(aio_mock: aioresponses) -> None:
     """Test login."""
     async with aiohttp.ClientSession() as session:
@@ -141,8 +141,8 @@ async def test_login(aio_mock: aioresponses) -> None:
         assert result is True
 
 
-@pytest.mark.asyncio()
-async def test_failed_login() -> None:
+@pytest.mark.asyncio
+async def test_failed_login(aio_mock: aioresponses) -> None:
     """Test failed login."""
     async with aiohttp.ClientSession() as session:
         client = Ogero("user", "wrongpass", session=session)
@@ -151,7 +151,7 @@ async def test_failed_login() -> None:
             await client.login()
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_get_accounts(aio_mock: aioresponses) -> None:
     """Test get accounts."""
     async with aiohttp.ClientSession() as session:
@@ -164,7 +164,7 @@ async def test_get_accounts(aio_mock: aioresponses) -> None:
         assert len(accounts) >= 1
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_get_consumption_info(aio_mock: aioresponses) -> None:
     """Test get consumption info."""
     async with aiohttp.ClientSession() as session:
@@ -178,7 +178,7 @@ async def test_get_consumption_info(aio_mock: aioresponses) -> None:
         assert consumption_info is not None
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_get_bill_info(aio_mock: aioresponses) -> None:
     """Test get bill info."""
     async with aiohttp.ClientSession() as session:
@@ -194,7 +194,7 @@ async def test_get_bill_info(aio_mock: aioresponses) -> None:
         assert len(bill_info.bills) >= 1
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_get_bill_info_no_outstanding_bill(aio_mock: aioresponses) -> None:
     """Test get bill info no outstanding bill."""
     async with aiohttp.ClientSession() as session:
@@ -211,7 +211,7 @@ async def test_get_bill_info_no_outstanding_bill(aio_mock: aioresponses) -> None
         assert len(bill_info.bills) >= 1
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_relogin(aio_mock: aioresponses) -> None:
     """Test re-login."""
     async with aiohttp.ClientSession() as session:
@@ -223,7 +223,7 @@ async def test_relogin(aio_mock: aioresponses) -> None:
         assert len(accounts) >= 1
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_fail_relogin(aio_mock: aioresponses) -> None:
     """Test fail re-login."""
     async with aiohttp.ClientSession() as session:
