@@ -1,5 +1,4 @@
-"""
-Using this.
+"""Using this.
 
 You really need a file called "ogero.json" in either the local dir or ~/.config/.
 It needs at least one user in the "users" field. eg:
@@ -13,22 +12,22 @@ It needs at least one user in the "users" field. eg:
 import pytest
 import requests
 
+pytestmark = pytest.mark.integration
+
 from pyogero import Ogero
 from pyogero.exceptions import AuthenticationException
 
 from .test_utils import configloader
 
 CONFIG = configloader()
-if CONFIG is None or CONFIG.users is None or len(CONFIG.users) == 0:
-    pytest.exit("You need some users in config.json")
 
 
 @pytest.fixture(name="clients", scope="session")
-def userfactory() -> list[Ogero] | None:
+def userfactory() -> list[Ogero]:
     """Get API factory."""
+    if CONFIG.users is None or len(CONFIG.users) == 0:
+        pytest.skip("No users in ogero.json")
     session = requests.Session()
-    if CONFIG.users is None:
-        return None
     return [
         Ogero(username=user.username, password=user.password, session=session)
         for user in CONFIG.users
