@@ -1,17 +1,25 @@
-"""types."""
+"""Domain types for Ogero API responses."""
 
-from datetime import datetime
+from __future__ import annotations
+
+from dataclasses import dataclass, field
 from enum import Enum
-from typing import TypedDict
+from typing import TYPE_CHECKING, TypedDict
 
 from pydantic import BaseModel
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 Content = bytes | str
 
 
+@dataclass
 class Account:
-    phone: str
-    internet: str
+    """Phone and internet account identifiers."""
+
+    phone: str = ""
+    internet: str = ""
 
     def __str__(self) -> str:
         return f"DSL# {self.internet} | Phone# {self.phone}"
@@ -21,28 +29,30 @@ class Account:
 
 
 class BillStatus(Enum):
+    """Bill payment status."""
+
     UNKNOWN = 0
     PAID = 1
     UNPAID = 2
 
 
+@dataclass
 class BillAmount:
-    amount: float
-    currency: str
+    """Monetary amount with currency."""
 
-    def __init__(self, amount: float = 0, currency: str = "LBP") -> None:
-        self.amount = amount
-        self.currency = currency
+    amount: float = 0
+    currency: str = "LBP"
 
-        if currency in ["L.L.", "LL", "L.L"]:
+    def __post_init__(self) -> None:
+        if self.currency in ("L.L.", "LL", "L.L"):
             self.currency = "LBP"
 
     @staticmethod
-    def parse(str_val: str):
-        amount, _currency = str_val.split(" ")
-        amount = float(amount.replace(",", ""))
-
-        return BillAmount(amount, _currency)
+    def parse(str_val: str) -> BillAmount:
+        """Parse a string like ``1,234 L.L.`` into a BillAmount."""
+        amount_str, currency = str_val.split(" ", 1)
+        amount = float(amount_str.replace(",", ""))
+        return BillAmount(amount=amount, currency=currency)
 
     def __str__(self) -> str:
         return f"{self.amount!s} {self.currency}"
@@ -51,10 +61,13 @@ class BillAmount:
         return self.__str__()
 
 
+@dataclass
 class Bill:
+    """A single bill row."""
+
     date: datetime
     amount: BillAmount
-    status: BillStatus
+    status: BillStatus = BillStatus.UNKNOWN
 
     def __str__(self) -> str:
         if self.status == BillStatus.PAID:
@@ -70,9 +83,12 @@ class Bill:
         return self.__str__()
 
 
+@dataclass
 class BillInfo:
+    """Outstanding balance and bill history."""
+
     total_outstanding: BillAmount
-    bills: list[Bill] = []
+    bills: list[Bill] = field(default_factory=list)
 
     def __str__(self) -> str:
         return f"Total outstanding: {self.total_outstanding}"
@@ -81,17 +97,23 @@ class BillInfo:
         return self.__str__()
 
 
+@dataclass
 class ConsumptionInfo:
-    speed: str
-    quota: int
-    upload: float
-    download: float
-    total_consumption: float
-    extra_consumption: float
-    last_update: datetime
+    """Internet consumption snapshot."""
+
+    speed: str = ""
+    quota: int = 0
+    upload: float = 0
+    download: float = 0
+    total_consumption: float = 0
+    extra_consumption: float = 0
+    last_update: datetime | None = None
 
     def __str__(self) -> str:
-        return f"Total Consumption: {self.total_consumption} GB; Last update: {self.last_update}"
+        return (
+            f"Total Consumption: {self.total_consumption} GB; "
+            f"Last update: {self.last_update}"
+        )
 
     def __repr__(self) -> str:
         return self.__str__()
@@ -116,6 +138,6 @@ class ConfigUser(BaseModel):
 
 
 class OgeroConfigFile(BaseModel):
-    """config file definition."""
+    """Config file definition for integration tests."""
 
     users: list[ConfigUser] | None = None

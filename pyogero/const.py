@@ -37,10 +37,10 @@ def default_headers() -> DefaultHeaders:
 
 
 API_ENDPOINTS = {
-    "login": f'{BASEURL["api"]}/Login.php',
-    "dashboard": f'{BASEURL["myogero"]}/mobileapp.dashboard.php?SessionID={{session_id}}&Username={{username}}&AppRequest&nbr={{phone_account}}&dsl={{internet_account}}',  # noqa: E501
-    "bill": f'{BASEURL["myogero"]}/bill.php?SessionID={{session_id}}&Username={{username}}&AppRequest&nbr={{phone_account}}',  # noqa: E501
-    "consumption": f'{BASEURL["myogero"]}/consumption.php?SessionID={{session_id}}&Username={{username}}&AppRequest&dsl={{internet_account}}',  # noqa: E501
+    "login": f"{BASEURL['api']}/Login.php",
+    "dashboard": f"{BASEURL['myogero']}/mobileapp.dashboard.php?SessionID={{session_id}}&Username={{username}}&AppRequest&nbr={{phone_account}}&dsl={{internet_account}}",
+    "bill": f"{BASEURL['myogero']}/bill.php?SessionID={{session_id}}&Username={{username}}&AppRequest&nbr={{phone_account}}",
+    "consumption": f"{BASEURL['myogero']}/consumption.php?SessionID={{session_id}}&Username={{username}}&AppRequest&dsl={{internet_account}}",
 }
 
 CONNECTION_SPEED = "Current Bundle"
