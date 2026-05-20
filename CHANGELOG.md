@@ -2,13 +2,16 @@
 
 ## Unreleased
 
-- Development tooling switched from Pipenv to [uv](https://docs.astral.sh/uv/) (`uv.lock`, `[dependency-groups]` in `pyproject.toml`).
-- CI and devcontainer use Python 3.14.
-- GitHub Actions modernized: pinned action SHAs, composite `setup-uv`, unified `ci.yml` and `release.yml` (auto-tag on `main` when missing, publish on `v*` tag push).
+## 0.14.1
+
+- Remove `upload` and `download` from `ConsumptionInfo` and consumption parsing; the My Ogero portal no longer exposes these fields.
 
 ## 0.14.0
 
-- Remove dependencies restrictions
+- Remove dependency upper pins (align with Home Assistant constraint ranges).
+- Development tooling switched from Pipenv to [uv](https://docs.astral.sh/uv/) (`uv.lock`, `[dependency-groups]` in `pyproject.toml`).
+- CI and devcontainer use Python 3.14.
+- GitHub Actions modernized: pinned action SHAs, composite `setup-uv`, unified `ci.yml` and `release.yml` (auto-tag on `main` when missing, publish on `v*` tag push).
 
 ## 0.13.0
 
