@@ -45,8 +45,6 @@ API_ENDPOINTS = {
 
 CONNECTION_SPEED = "Current Bundle"
 QUOTA = "Total Quota"
-UPLOAD = "Upload"
-DOWNLOAD = "Download"
 TOTAL_CONSUMPTION = "Total Consumption"
 EXTRA_CONSUMPTION = "Extra Consumption"
 LAST_UPDATE = "Consumption Until"
