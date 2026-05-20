@@ -122,11 +122,8 @@ def consumption_response() -> MockDataResponse:
             <div class="MyConsumptionRight"></div>
 
             <div class="MyConsumptionLeft">
-                <!-- <div class="MyConsumptionGrid"><span>Account</span><span>Lxxxxxx / xxxxxxxx</span></div> -->
                 <div class="MyConsumptionGrid"><span>Current Bundle</span><span>up to 50Mbps (FUP)</span></div>
                 <div class="MyConsumptionGrid"><span>Total Quota</span><span>800 GB FUP</span></div>
-                <!-- <div class="MyConsumptionGrid"><span>Upload</span><span></span></div>
-                <div class="MyConsumptionGrid"><span>Download</span><span></span></div> -->
                 <div class="MyConsumptionGrid"><span>Total Consumption</span><span>499 GB</span></div>
                 <div class="MyConsumptionGrid"><span>Extra Consumption</span><span>0 GB</span></div>
                 <div class="MyConsumptionGrid"><span>Consumption Until</span><span>25/06/2024 21:17</span></div>

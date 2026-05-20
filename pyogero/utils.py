@@ -9,13 +9,11 @@ from bs4 import BeautifulSoup, Tag
 
 from .const import (
     CONNECTION_SPEED,
-    DOWNLOAD,
     EXTRA_CONSUMPTION,
     LAST_UPDATE,
     LEBANON_TIMEZONE,
     QUOTA,
     TOTAL_CONSUMPTION,
-    UPLOAD,
 )
 from .exceptions import OgeroParseError
 from .types import (
@@ -88,10 +86,6 @@ def parse_consumption_info(content: Content) -> ConsumptionInfo:
             info.speed = value
         elif key == QUOTA:
             info.quota = int(__parse_status_value(value))
-        elif key == UPLOAD:
-            info.upload = __parse_status_value(value)
-        elif key == DOWNLOAD:
-            info.download = __parse_status_value(value)
         elif key == TOTAL_CONSUMPTION:
             info.total_consumption = __parse_status_value(value)
         elif key == EXTRA_CONSUMPTION:

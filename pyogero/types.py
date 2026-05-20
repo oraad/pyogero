@@ -103,8 +103,6 @@ class ConsumptionInfo:
 
     speed: str = ""
     quota: int = 0
-    upload: float = 0
-    download: float = 0
     total_consumption: float = 0
     extra_consumption: float = 0
     last_update: datetime | None = None
