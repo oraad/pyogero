@@ -6,6 +6,10 @@
 - CI and devcontainer use Python 3.14.
 - GitHub Actions modernized: pinned action SHAs, composite `setup-uv`, unified `ci.yml` and `release.yml` (auto-tag on `main` when missing, publish on `v*` tag push).
 
+## 0.14.0
+
+- Remove dependencies restrictions
+
 ## 0.13.0
 
 - Add PEP 561 `py.typed` marker for type checkers.
