@@ -4,7 +4,7 @@ description: Install uv and sync frozen dev dependencies for pyogero
 runs:
   using: composite
   steps:
-    - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
+    - uses: astral-sh/setup-uv@v6
       with:
         python-version: "3.14"
         enable-cache: true
