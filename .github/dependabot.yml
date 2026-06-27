@@ -14,4 +14,8 @@ updates:
     groups:
       dev-dependencies:
         patterns:
-          - "*"
+          - "pytest*"
+          - "ruff"
+          - "requests-mock"
+          - "aioresponses"
+          - "build"
