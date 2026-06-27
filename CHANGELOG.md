@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.14.2
+
+- Fix consumption parsing when the My Ogero portal splits values across multiple `<span>` tags or inserts whitespace text nodes between spans.
+- Raise `OgeroParseError` when the consumption grid is missing from the HTML response.
+- Replace inline test HTML with redacted live-shaped fixtures (`tests/fixtures/`).
+- `Account.__str__` uses `Internet#` instead of `DSL#`.
+
 ## 0.14.1
 
 - Remove `upload` and `download` from `ConsumptionInfo` and consumption parsing; the My Ogero portal no longer exposes these fields.

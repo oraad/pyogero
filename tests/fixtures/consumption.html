@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ogero - My Consumption</title>
+    <link rel="icon" type="image/png" href="https://ogero.gov.lb/img/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="https://ogero.gov.lb/img/favicon-16x16.png" sizes="16x16" />
+<link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/css/style.php"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/css/font-awesome/css/font-awesome.min.css"/>
+<script type="text/javascript" language="javascript" src="https://ogero.gov.lb/js/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://ogero.gov.lb/js/functions.js"></script>
+<script type="text/javascript" src="https://ogero.gov.lb/js/jquery.OwlCarousel/owl.carousel.min.js"></script>
+<link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/js/jquery.OwlCarousel/assets/owl.carousel.min.css"/>
+<link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/js/jquery.OwlCarousel/assets/owl.theme.default.min.css"/>
+<script type="text/javascript" src="https://ogero.gov.lb/js/jquery.aos/dist/aos.js"></script>
+<link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/js/jquery.aos/dist/aos.css"/>
+<link rel="stylesheet" href="https://ogero.gov.lb/js/jquery.fancybox/jquery.fancybox.min.css" />
+<script src="https://ogero.gov.lb/js/jquery.fancybox/jquery.fancybox.min.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">    <link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/myogero/css/style.php"/>    <script language="JavaScript" src="https://ogero.gov.lb/js/jquery.easypiechart/jquery.easypiechart.min.js"></script>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=617620711768818';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+<div class="MyOgeroDashboardContainer">
+    <div class="MyOgeroDashboard" data-aos="fade-right">
+        <div class="BillNumberChange" data-aos="fade-right" data-aos-delay="0"><div class="MyOgeroDashboardSection2NumberChangeContainer">
+    <div class="MyOgeroDashboardSection2NumberChange">
+        <div>Internet Account</div>
+        <select name="changnumber" onchange="var selected = this.options[this.selectedIndex]; window.location='?&AppRequest&dsl=' + selected.value + '&nbr=' + selected.getAttribute('data-nbr');">
+            <option value="Lxxxxxx" data-nbr="xxxxxxxx" selected>Lxxxxxx / xx xxxxxx </option><option value="Lxxxxxx" data-nbr="xxxxxxxx" >Lxxxxxx / xx xxxxxx </option>        </select>
+        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        <a href="enroll.php?&AppRequest&Select=enrollanumber" class="BackgroundGradient"></a>
+    </div>
+</div></div>
+
+        
+        <div class="MyOgeroDashboardSection3" data-aos="fade-right" data-aos-delay="200">
+            <div class="MyOgeroDashboardSection1Name">Lxxxxxx / xx xxxxxx</div>
+            <div class="sep"></div>
+                            <div class="MyConsumptionRight">
+                    <!--
+                                                                  <div class="MyOgeroDashboardSection2Consumption"><div><span class="chart" data-percent="0"></span></div><section>800 GB FUP<span>0%</span></section><b>Consumption</b>0 / 800 GB FUP</div>
+                                        -->
+                                                                                                    <div class="MyOgeroDashboardSection2Consumption">
+                                <div><span class="chart" data-percent="0"></span></div>
+                                <section>800 GB FUP<span>0%</span></section>
+                                <b>Consumption</b>0 / 800 GB FUP                            </div>
+                                                            </div>
+
+                <div class="MyConsumptionLeft">
+                    <!-- <div class="MyConsumptionGrid"><span>Account</span><span>Lxxxxxx / xx xxxxxx</span></div> -->
+                    <div class="MyConsumptionGrid"><span>Current Bundle</span><span>up to 50Mbps (FUP)</span></div>
+                    <div class="MyConsumptionGrid">
+                        <span>Total Quota</span>
+                        <span>800 GB FUP</span>
+                    </div> <!-- <div class="MyConsumptionGrid"><span>Upload</span><span></span></div>
+                    <div class="MyConsumptionGrid"><span>Download</span><span></span></div> -->
+                    <div class="MyConsumptionGrid"><span>Total Consumption</span><span>0 GB</span></div>
+                    <div class="MyConsumptionGrid">
+                        <span>Upload</span>
+                        <span>0 GB</span>
+                    </div>
+                    <div class="MyConsumptionGrid">
+                        <span>Download</span>
+                        <span>0 GB</span>
+                    </div>
+                    <div class="MyConsumptionGrid"><span>Extra Consumption</span><span>0 GB</span></div>
+                    <div class="MyConsumptionGrid"><span>Consumption Until</span><span></span></div>
+                                    </div>
+
+                    </div>
+    </div>
+</div>
+<script language="javascript">
+    $(function() {
+        $('.chart').easyPieChart({
+            easing: 'easeOutBounce',
+            barColor: 'rgba(49,39,131,1)',
+            trackColor: 'rgba(238,238,238,1)',
+            scaleColor: 'transparent',
+            lineWidth: '10',
+            size: '150',
+            onStep: function(from, to, percent) {
+                $(this.el).find('.percent').text(Math.round(percent));
+            }
+        });
+
+    });
+</script>
+
+<div class="FooterContainr">
+    <div class="Footer">
+        <div class="FooterSection1">
+            <a href="https://ogero.gov.lb/index.php">Home Page</a>.
+            <a href="https://ogero.gov.lb/services.php?type=personal">Personal Services</a>.
+            <a href="https://ogero.gov.lb/services.php?type=business">Business Services</a>.
+            <a href="https://ogero.gov.lb/meet.php">Meet Ogero</a>.
+            <!-- <a href="<?php// echo BaseRoot; ?>/bkp/tickets/ask.php">Ask Our Experts</a>. -->
+            <a href="https://ogero.gov.lb/contact.php">Contact Us</a>.
+            <br>
+            <a href="https://ogero.gov.lb/directory.php">Directory</a>.
+            <a href="https://ogero.gov.lb/articles.php">Articles</a>.
+            <a href="https://ogero.gov.lb/faqs.php">FAQs</a>.
+            <a href="https://ogero.gov.lb/bids.php">Bids</a>.
+            <div><a href="" style="font-weight: 400;">Ogero.gov.lb</a>, All rights reserved © 2026. Designed & Developed by <a href="https://tedmob.com">TEDMOB.com</a></div>
+        </div>
+        <div class="FooterSection2">
+            <div>Follow Us: </div>
+            <a href="https://www.facebook.com/OgeroTelecom/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/ogerotelecom" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/ogerotelecom" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    <div class="sep" style="height:1px"></div>
+</div>
+<div class="FooterScrollUpContainer"><div class="FooterScrollUp"><i class="fa fa-angle-up" aria-hidden="true"></i></div></div>
+
+<script language="javascript">
+
+   function createSticky2(sticky) {
+       if (typeof sticky !== "undefined") {
+           $(window).on("scroll", function() {
+               if($(window).scrollTop() >= ($('.FooterContainr').offset().top - $(window).height())){
+                   sticky.addClass("FooterScrollUpNotFixed");
+               }else{
+                   sticky.removeClass("FooterScrollUpNotFixed");
+               }
+           });
+           $(window).scrollTop() >= $('.FooterContainr').offset().top ? sticky.addClass("FooterScrollUpNotFixed") : sticky.removeClass("FooterScrollUpNotFixed");
+       }
+   }
+   createSticky2($(".FooterScrollUp"));
+
+   $(".FooterScrollUp").click(function() {
+       $("html, body").animate({ scrollTop: 0 }, "slow");
+       return false;
+   });
+
+   if($(document).height()<=$(window).height()){
+       $(".FooterScrollUp").hide();
+   }
+</script>
+<script>
+    AOS.init({ easing: 'ease-in-out-sine', duration: 500, once : true });
+
+    $('.PageTitle').click(function(){
+        window.location=window.location.href;
+    })
+
+    if($(document).width()>='800') {
+        $('.ServiceInfoText, .LoginForm').css({'min-height': $(window).height() - $('.HeaderDesktopContainer').outerHeight() - $('.FooterContainr').outerHeight()});
+
+        if ($('.MyOgeroDashboardSection2').outerHeight() > $('.MyOgeroDashboardSection1').outerHeight()) {
+            $('.MyOgeroDashboardSection1').outerHeight($('.MyOgeroDashboardSection2').outerHeight());
+        } else {
+            $('.MyOgeroDashboardSection2').outerHeight($('.MyOgeroDashboardSection1').outerHeight());
+        }
+        if ($('.BillNumberChange').length > 0) {
+            $('.MyOgeroDashboardSection3, .MyOgeroDashboardSection2, .MyOgeroDashboardSection1').css({'min-height': $(document).height() - $('.BillNumberChange').outerHeight() - $('.HeaderDesktopContainer').outerHeight() - $('.MyOgeroMenuContainer').outerHeight() - $('.FooterContainr').outerHeight()});
+        } else {
+            $('.MyOgeroDashboardSection3, .MyOgeroDashboardSection2, .MyOgeroDashboardSection1').css({'min-height': $(document).height() - $('.HeaderDesktopContainer').outerHeight() - $('.MyOgeroMenuContainer').outerHeight() - $('.FooterContainr').outerHeight()});
+        }
+    }
+    $('.ServiceInfoTextText').find('a').not('.BidDownload').addClass('BackgroundGradient');
+    $('.ServiceInfoTextText').find('a').not('.BidDownload').append(' <b>&gt;</b>');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111620461-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-111620461-1');
+</script>
+</body>
+</html>

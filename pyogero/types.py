@@ -22,7 +22,7 @@ class Account:
     internet: str = ""
 
     def __str__(self) -> str:
-        return f"DSL# {self.internet} | Phone# {self.phone}"
+        return f"Internet# {self.internet} | Phone# {self.phone}"
 
     def __repr__(self) -> str:
         return self.__str__()

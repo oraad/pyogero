@@ -18,6 +18,7 @@ from pyogero.utils import (
 from .mock_data import (
     bill_response,
     consumption_response,
+    consumption_response_split_spans,
     dashboard_response,
     unauthorized_response,
 )
@@ -27,9 +28,11 @@ def test_parse_accounts_success() -> None:
     """Parse accounts from dashboard HTML."""
     data, _, _ = dashboard_response()
     accounts = parse_accounts(data)
-    assert len(accounts) == 1
+    assert len(accounts) == 2
     assert accounts[0].phone == "xxxxxxxx"
     assert accounts[0].internet == "Lxxxxxx"
+    assert accounts[1].phone == "xxxxxxxx"
+    assert accounts[1].internet == "Lxxxxxx"
 
 
 def test_parse_accounts_missing_selector() -> None:
@@ -53,14 +56,38 @@ def test_parse_bills_missing_table() -> None:
 
 
 def test_parse_consumption_info_fields() -> None:
-    """Parse consumption metrics and timestamp."""
+    """Parse consumption metrics from live-shaped HTML."""
     data, _, _ = consumption_response()
+    info = parse_consumption_info(data)
+    assert info.speed == "up to 50Mbps (FUP)"
+    assert info.quota == 800
+    assert info.total_consumption == 0.0
+    assert info.extra_consumption == 0.0
+    assert info.last_update is None
+
+
+def test_parse_consumption_info_split_spans() -> None:
+    """Parse rows where values span multiple tags with whitespace between them."""
+    data, _, _ = consumption_response_split_spans()
     info = parse_consumption_info(data)
     assert info.speed == "up to 50Mbps (FUP)"
     assert info.quota == 800
     assert info.total_consumption == 499.0
     assert info.extra_consumption == 0.0
     assert info.last_update == datetime(2024, 6, 25, 21, 17, tzinfo=LEBANON_TIMEZONE)
+
+
+def test_parse_consumption_info_missing_grid() -> None:
+    """Missing consumption grid raises OgeroParseError."""
+    with pytest.raises(OgeroParseError, match="Consumption grid"):
+        parse_consumption_info("<html><body></body></html>")
+
+
+def test_parse_consumption_info_empty_last_update() -> None:
+    """Empty Consumption Until value leaves last_update unset."""
+    data, _, _ = consumption_response()
+    info = parse_consumption_info(data)
+    assert info.last_update is None
 
 
 def test_parse_error_message_login_required() -> None:

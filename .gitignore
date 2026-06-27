@@ -190,3 +190,6 @@ pip-selfcheck.json
 
 # Local config file
 ogero.json
+
+# Captured live API samples (may contain pre-redaction artifacts)
+tests/samples/

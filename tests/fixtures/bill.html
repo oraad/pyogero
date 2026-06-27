@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ogero - My Bills</title>
+    <link rel="icon" type="image/png" href="https://ogero.gov.lb/img/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="https://ogero.gov.lb/img/favicon-16x16.png" sizes="16x16" />
+<link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/css/style.php"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/css/font-awesome/css/font-awesome.min.css"/>
+<script type="text/javascript" language="javascript" src="https://ogero.gov.lb/js/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://ogero.gov.lb/js/functions.js"></script>
+<script type="text/javascript" src="https://ogero.gov.lb/js/jquery.OwlCarousel/owl.carousel.min.js"></script>
+<link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/js/jquery.OwlCarousel/assets/owl.carousel.min.css"/>
+<link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/js/jquery.OwlCarousel/assets/owl.theme.default.min.css"/>
+<script type="text/javascript" src="https://ogero.gov.lb/js/jquery.aos/dist/aos.js"></script>
+<link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/js/jquery.aos/dist/aos.css"/>
+<link rel="stylesheet" href="https://ogero.gov.lb/js/jquery.fancybox/jquery.fancybox.min.css" />
+<script src="https://ogero.gov.lb/js/jquery.fancybox/jquery.fancybox.min.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">    <link type="text/css" rel="stylesheet" href="https://ogero.gov.lb/myogero/css/style.php"/></head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=617620711768818';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+<div class="MyOgeroDashboardContainer">
+    <div class="MyOgeroDashboard">
+        <div class="BillNumberChange" data-aos="fade-right" data-aos-delay="0"><div class="MyOgeroDashboardSection2NumberChangeContainer">
+    <div class="MyOgeroDashboardSection2NumberChange">
+        <div>Phone Number</div>
+        <select name="changnumber" onchange="window.location='?&AppRequest&nbr='+$(this).val()">
+            <option value="xxxxxxxx" selected>xx xxxxxx [ DSL # Lxxxxxx ] [ FIBER # Lxxxxxx ] </option>        </select>
+        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        <a href="enroll.php?&AppRequest&Select=enrollanumber" class="BackgroundGradient"></a>
+    </div>
+
+</div></div>
+                <div class="MyOgeroDashboardSection3" data-aos="fade-right" data-aos-delay="200">
+            
+
+            
+
+                <div class="BillOutstandingSection1">Your Outstanding bills value: <span>3,950,000 L.L.</span></div>
+                <div class="BillOutstandingSection2 BackgroundGradient"><div class="ButtonRounded BackgroundGradient"><a href="javascript:;" onclick="ShowLoader(); $('#billpaymentform').submit();">Pay Now</a></div></div>
+                <div class="sep"></div>
+
+                <form name="billpaymentform" id="billpaymentform" method="post" action="payment.to.php">
+                    <input type="hidden" name="procedure" value="phonebill">
+                    <input type="hidden" name="srvline" value="xxxxxxx">
+                    <input type="hidden" name="number" value="xxxxxxxx">
+                </form>
+            
+
+            <div class="MyOgeroDashboardSection1Name">My Bills for <span>xx xxxxxx</span></div>
+            <div class="sep"></div><div class="sep"></div>
+            <table class="BillTable" cellspacing="0" cellpadding="10" width="100%">
+            <tr><th></th><th>Bill Value</th><th>Payment Status</th><th>Operations</th></tr>
+                            <tr>
+                    <td><div class="BillDate BackgroundGradient"><div>May</div><span>2026</span></div></td>
+                    <td><div class="BillAmount">3,950,000 L.L.</div></td>
+                    <td>Not paid</td>
+                    <td>
+                        <div class="BillMenuDesktop">
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=5&y=2026&t=89c523f67c898209b20047546a2a576b" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=5&y=2026&t=89c523f67c898209b20047546a2a576b"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed Invoice</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.gsm.php?number=xxxxxxxx&m=5&y=2026&t=89c523f67c898209b20047546a2a576b" href="bill.print.gsm.php?number=xxxxxxxx&m=5&y=2026&t=89c523f67c898209b20047546a2a576b"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.international.php?number=xxxxxxxx&m=5&y=2026&t=89c523f67c898209b20047546a2a576b" href="bill.print.international.php?number=xxxxxxxx&m=5&y=2026&t=89c523f67c898209b20047546a2a576b"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+                        </div>
+                        <a href="javascript:;" onclick="$('.BillMenuMobile').slideUp(); $('#BillMenuMobile_0').slideDown();" class="BillMenuMobileLink BackgroundGradient"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+
+                    </td>
+                </tr>
+                            <tr>
+                    <td><div class="BillDate BackgroundGradient"><div>Apr</div><span>2026</span></div></td>
+                    <td><div class="BillAmount">2,820,000 L.L.</div></td>
+                    <td>Paid</td>
+                    <td>
+                        <div class="BillMenuDesktop">
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=4&y=2026&t=d7f30491f7b91925ecd8f3c5765de05c" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=4&y=2026&t=d7f30491f7b91925ecd8f3c5765de05c"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed Invoice</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.gsm.php?number=xxxxxxxx&m=4&y=2026&t=d7f30491f7b91925ecd8f3c5765de05c" href="bill.print.gsm.php?number=xxxxxxxx&m=4&y=2026&t=d7f30491f7b91925ecd8f3c5765de05c"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.international.php?number=xxxxxxxx&m=4&y=2026&t=d7f30491f7b91925ecd8f3c5765de05c" href="bill.print.international.php?number=xxxxxxxx&m=4&y=2026&t=d7f30491f7b91925ecd8f3c5765de05c"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+                        </div>
+                        <a href="javascript:;" onclick="$('.BillMenuMobile').slideUp(); $('#BillMenuMobile_1').slideDown();" class="BillMenuMobileLink BackgroundGradient"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+
+                    </td>
+                </tr>
+                            <tr>
+                    <td><div class="BillDate BackgroundGradient"><div>Mar</div><span>2026</span></div></td>
+                    <td><div class="BillAmount">2,820,000 L.L.</div></td>
+                    <td>Paid</td>
+                    <td>
+                        <div class="BillMenuDesktop">
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=3&y=2026&t=4d1443392b755c51218845a645f49292" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=3&y=2026&t=4d1443392b755c51218845a645f49292"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed Invoice</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.gsm.php?number=xxxxxxxx&m=3&y=2026&t=4d1443392b755c51218845a645f49292" href="bill.print.gsm.php?number=xxxxxxxx&m=3&y=2026&t=4d1443392b755c51218845a645f49292"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.international.php?number=xxxxxxxx&m=3&y=2026&t=4d1443392b755c51218845a645f49292" href="bill.print.international.php?number=xxxxxxxx&m=3&y=2026&t=4d1443392b755c51218845a645f49292"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+                        </div>
+                        <a href="javascript:;" onclick="$('.BillMenuMobile').slideUp(); $('#BillMenuMobile_2').slideDown();" class="BillMenuMobileLink BackgroundGradient"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+
+                    </td>
+                </tr>
+                            <tr>
+                    <td><div class="BillDate BackgroundGradient"><div>Feb</div><span>2026</span></div></td>
+                    <td><div class="BillAmount">2,820,000 L.L.</div></td>
+                    <td>Paid</td>
+                    <td>
+                        <div class="BillMenuDesktop">
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=2&y=2026&t=a71c6e27f913181ff0c9686f8556fec7" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=2&y=2026&t=a71c6e27f913181ff0c9686f8556fec7"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed Invoice</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.gsm.php?number=xxxxxxxx&m=2&y=2026&t=a71c6e27f913181ff0c9686f8556fec7" href="bill.print.gsm.php?number=xxxxxxxx&m=2&y=2026&t=a71c6e27f913181ff0c9686f8556fec7"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.international.php?number=xxxxxxxx&m=2&y=2026&t=a71c6e27f913181ff0c9686f8556fec7" href="bill.print.international.php?number=xxxxxxxx&m=2&y=2026&t=a71c6e27f913181ff0c9686f8556fec7"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+                        </div>
+                        <a href="javascript:;" onclick="$('.BillMenuMobile').slideUp(); $('#BillMenuMobile_3').slideDown();" class="BillMenuMobileLink BackgroundGradient"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+
+                    </td>
+                </tr>
+                            <tr>
+                    <td><div class="BillDate BackgroundGradient"><div>Jan</div><span>2026</span></div></td>
+                    <td><div class="BillAmount">2,820,000 L.L.</div></td>
+                    <td>Paid</td>
+                    <td>
+                        <div class="BillMenuDesktop">
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=1&y=2026&t=6ef9f5edc28b92224b5e28ed9a94d3ec" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=1&y=2026&t=6ef9f5edc28b92224b5e28ed9a94d3ec"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed Invoice</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.gsm.php?number=xxxxxxxx&m=1&y=2026&t=6ef9f5edc28b92224b5e28ed9a94d3ec" href="bill.print.gsm.php?number=xxxxxxxx&m=1&y=2026&t=6ef9f5edc28b92224b5e28ed9a94d3ec"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.international.php?number=xxxxxxxx&m=1&y=2026&t=6ef9f5edc28b92224b5e28ed9a94d3ec" href="bill.print.international.php?number=xxxxxxxx&m=1&y=2026&t=6ef9f5edc28b92224b5e28ed9a94d3ec"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+                        </div>
+                        <a href="javascript:;" onclick="$('.BillMenuMobile').slideUp(); $('#BillMenuMobile_4').slideDown();" class="BillMenuMobileLink BackgroundGradient"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+
+                    </td>
+                </tr>
+                            <tr>
+                    <td><div class="BillDate BackgroundGradient"><div>Dec</div><span>2025</span></div></td>
+                    <td><div class="BillAmount">2,820,000 L.L.</div></td>
+                    <td>Paid</td>
+                    <td>
+                        <div class="BillMenuDesktop">
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=12&y=2025&t=bd0d090c9befb82329dc00cd3a37eee6" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=12&y=2025&t=bd0d090c9befb82329dc00cd3a37eee6"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed Invoice</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.gsm.php?number=xxxxxxxx&m=12&y=2025&t=bd0d090c9befb82329dc00cd3a37eee6" href="bill.print.gsm.php?number=xxxxxxxx&m=12&y=2025&t=bd0d090c9befb82329dc00cd3a37eee6"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.international.php?number=xxxxxxxx&m=12&y=2025&t=bd0d090c9befb82329dc00cd3a37eee6" href="bill.print.international.php?number=xxxxxxxx&m=12&y=2025&t=bd0d090c9befb82329dc00cd3a37eee6"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+                        </div>
+                        <a href="javascript:;" onclick="$('.BillMenuMobile').slideUp(); $('#BillMenuMobile_5').slideDown();" class="BillMenuMobileLink BackgroundGradient"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+
+                    </td>
+                </tr>
+                            <tr>
+                    <td><div class="BillDate BackgroundGradient"><div>Dec</div><span>2023</span></div></td>
+                    <td><div class="BillAmount">11,000 L.L.</div></td>
+                    <td>Paid</td>
+                    <td>
+                        <div class="BillMenuDesktop">
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=12&y=2023&t=b6ea15bc901b72ad41e152f8390b8483" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=12&y=2023&t=b6ea15bc901b72ad41e152f8390b8483"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed Invoice</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.gsm.php?number=xxxxxxxx&m=12&y=2023&t=b6ea15bc901b72ad41e152f8390b8483" href="bill.print.gsm.php?number=xxxxxxxx&m=12&y=2023&t=b6ea15bc901b72ad41e152f8390b8483"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a> |
+                            <a class="BillLink" target="_blank" data-fancybox="iframe" data-type="iframe" data-src="bill.print.international.php?number=xxxxxxxx&m=12&y=2023&t=b6ea15bc901b72ad41e152f8390b8483" href="bill.print.international.php?number=xxxxxxxx&m=12&y=2023&t=b6ea15bc901b72ad41e152f8390b8483"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+                        </div>
+                        <a href="javascript:;" onclick="$('.BillMenuMobile').slideUp(); $('#BillMenuMobile_6').slideDown();" class="BillMenuMobileLink BackgroundGradient"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+
+                    </td>
+                </tr>
+                        </table>
+        </div>
+    </div>
+</div>
+
+    <div class="BillMenuMobile" id="BillMenuMobile_0">
+        <div class="BillMenuMobileClose" onclick="$(this).parents('.BillMenuMobile').slideUp()"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <!-- updated by hassan 7/5/2021 -->
+<!--        <a target="_blank" href="bill.print.php?number=--><!--&m=--><!--&y=--><!--&t=--><!--"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>-->
+        <a target="_blank" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=5&y=2026&t=89c523f67c898209b20047546a2a576b"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>
+        <a target="_blank" href="bill.print.gsm.php?number=xxxxxxxx&m=5&y=2026&t=89c523f67c898209b20047546a2a576b"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a>
+        <a target="_blank" href="bill.print.international.php?number=xxxxxxxx&m=5&y=2026&t=89c523f67c898209b20047546a2a576b"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+    </div>
+    <div class="BillMenuMobile" id="BillMenuMobile_1">
+        <div class="BillMenuMobileClose" onclick="$(this).parents('.BillMenuMobile').slideUp()"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <!-- updated by hassan 7/5/2021 -->
+<!--        <a target="_blank" href="bill.print.php?number=--><!--&m=--><!--&y=--><!--&t=--><!--"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>-->
+        <a target="_blank" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=4&y=2026&t=d7f30491f7b91925ecd8f3c5765de05c"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>
+        <a target="_blank" href="bill.print.gsm.php?number=xxxxxxxx&m=4&y=2026&t=d7f30491f7b91925ecd8f3c5765de05c"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a>
+        <a target="_blank" href="bill.print.international.php?number=xxxxxxxx&m=4&y=2026&t=d7f30491f7b91925ecd8f3c5765de05c"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+    </div>
+    <div class="BillMenuMobile" id="BillMenuMobile_2">
+        <div class="BillMenuMobileClose" onclick="$(this).parents('.BillMenuMobile').slideUp()"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <!-- updated by hassan 7/5/2021 -->
+<!--        <a target="_blank" href="bill.print.php?number=--><!--&m=--><!--&y=--><!--&t=--><!--"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>-->
+        <a target="_blank" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=3&y=2026&t=4d1443392b755c51218845a645f49292"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>
+        <a target="_blank" href="bill.print.gsm.php?number=xxxxxxxx&m=3&y=2026&t=4d1443392b755c51218845a645f49292"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a>
+        <a target="_blank" href="bill.print.international.php?number=xxxxxxxx&m=3&y=2026&t=4d1443392b755c51218845a645f49292"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+    </div>
+    <div class="BillMenuMobile" id="BillMenuMobile_3">
+        <div class="BillMenuMobileClose" onclick="$(this).parents('.BillMenuMobile').slideUp()"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <!-- updated by hassan 7/5/2021 -->
+<!--        <a target="_blank" href="bill.print.php?number=--><!--&m=--><!--&y=--><!--&t=--><!--"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>-->
+        <a target="_blank" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=2&y=2026&t=a71c6e27f913181ff0c9686f8556fec7"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>
+        <a target="_blank" href="bill.print.gsm.php?number=xxxxxxxx&m=2&y=2026&t=a71c6e27f913181ff0c9686f8556fec7"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a>
+        <a target="_blank" href="bill.print.international.php?number=xxxxxxxx&m=2&y=2026&t=a71c6e27f913181ff0c9686f8556fec7"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+    </div>
+    <div class="BillMenuMobile" id="BillMenuMobile_4">
+        <div class="BillMenuMobileClose" onclick="$(this).parents('.BillMenuMobile').slideUp()"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <!-- updated by hassan 7/5/2021 -->
+<!--        <a target="_blank" href="bill.print.php?number=--><!--&m=--><!--&y=--><!--&t=--><!--"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>-->
+        <a target="_blank" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=1&y=2026&t=6ef9f5edc28b92224b5e28ed9a94d3ec"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>
+        <a target="_blank" href="bill.print.gsm.php?number=xxxxxxxx&m=1&y=2026&t=6ef9f5edc28b92224b5e28ed9a94d3ec"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a>
+        <a target="_blank" href="bill.print.international.php?number=xxxxxxxx&m=1&y=2026&t=6ef9f5edc28b92224b5e28ed9a94d3ec"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+    </div>
+    <div class="BillMenuMobile" id="BillMenuMobile_5">
+        <div class="BillMenuMobileClose" onclick="$(this).parents('.BillMenuMobile').slideUp()"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <!-- updated by hassan 7/5/2021 -->
+<!--        <a target="_blank" href="bill.print.php?number=--><!--&m=--><!--&y=--><!--&t=--><!--"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>-->
+        <a target="_blank" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=12&y=2025&t=bd0d090c9befb82329dc00cd3a37eee6"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>
+        <a target="_blank" href="bill.print.gsm.php?number=xxxxxxxx&m=12&y=2025&t=bd0d090c9befb82329dc00cd3a37eee6"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a>
+        <a target="_blank" href="bill.print.international.php?number=xxxxxxxx&m=12&y=2025&t=bd0d090c9befb82329dc00cd3a37eee6"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+    </div>
+    <div class="BillMenuMobile" id="BillMenuMobile_6">
+        <div class="BillMenuMobileClose" onclick="$(this).parents('.BillMenuMobile').slideUp()"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <!-- updated by hassan 7/5/2021 -->
+<!--        <a target="_blank" href="bill.print.php?number=--><!--&m=--><!--&y=--><!--&t=--><!--"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>-->
+        <a target="_blank" href="bill.print.php?old_serv_nbr=xxxxxxxx&number=xxxxxxxx&m=12&y=2023&t=b6ea15bc901b72ad41e152f8390b8483"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i> Detailed invoice</a>
+        <a target="_blank" href="bill.print.gsm.php?number=xxxxxxxx&m=12&y=2023&t=b6ea15bc901b72ad41e152f8390b8483"><i class="fa fa-mobile" aria-hidden="true"></i> Outgoing GSM Calls</a>
+        <a target="_blank" href="bill.print.international.php?number=xxxxxxxx&m=12&y=2023&t=b6ea15bc901b72ad41e152f8390b8483"><i class="fa fa-phone" aria-hidden="true"></i> Outgoing International Calls</a>
+    </div>
+<script language="javascript">$('.BillMenuMobile').slideUp(0);</script>
+
+<div class="FooterContainr">
+    <div class="Footer">
+        <div class="FooterSection1">
+            <a href="https://ogero.gov.lb/index.php">Home Page</a>.
+            <a href="https://ogero.gov.lb/services.php?type=personal">Personal Services</a>.
+            <a href="https://ogero.gov.lb/services.php?type=business">Business Services</a>.
+            <a href="https://ogero.gov.lb/meet.php">Meet Ogero</a>.
+            <!-- <a href="<?php// echo BaseRoot; ?>/bkp/tickets/ask.php">Ask Our Experts</a>. -->
+            <a href="https://ogero.gov.lb/contact.php">Contact Us</a>.
+            <br>
+            <a href="https://ogero.gov.lb/directory.php">Directory</a>.
+            <a href="https://ogero.gov.lb/articles.php">Articles</a>.
+            <a href="https://ogero.gov.lb/faqs.php">FAQs</a>.
+            <a href="https://ogero.gov.lb/bids.php">Bids</a>.
+            <div><a href="" style="font-weight: 400;">Ogero.gov.lb</a>, All rights reserved © 2026. Designed & Developed by <a href="https://tedmob.com">TEDMOB.com</a></div>
+        </div>
+        <div class="FooterSection2">
+            <div>Follow Us: </div>
+            <a href="https://www.facebook.com/OgeroTelecom/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/ogerotelecom" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/ogerotelecom" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    <div class="sep" style="height:1px"></div>
+</div>
+<div class="FooterScrollUpContainer"><div class="FooterScrollUp"><i class="fa fa-angle-up" aria-hidden="true"></i></div></div>
+
+<script language="javascript">
+
+   function createSticky2(sticky) {
+       if (typeof sticky !== "undefined") {
+           $(window).on("scroll", function() {
+               if($(window).scrollTop() >= ($('.FooterContainr').offset().top - $(window).height())){
+                   sticky.addClass("FooterScrollUpNotFixed");
+               }else{
+                   sticky.removeClass("FooterScrollUpNotFixed");
+               }
+           });
+           $(window).scrollTop() >= $('.FooterContainr').offset().top ? sticky.addClass("FooterScrollUpNotFixed") : sticky.removeClass("FooterScrollUpNotFixed");
+       }
+   }
+   createSticky2($(".FooterScrollUp"));
+
+   $(".FooterScrollUp").click(function() {
+       $("html, body").animate({ scrollTop: 0 }, "slow");
+       return false;
+   });
+
+   if($(document).height()<=$(window).height()){
+       $(".FooterScrollUp").hide();
+   }
+</script>
+<script>
+    AOS.init({ easing: 'ease-in-out-sine', duration: 500, once : true });
+
+    $('.PageTitle').click(function(){
+        window.location=window.location.href;
+    })
+
+    if($(document).width()>='800') {
+        $('.ServiceInfoText, .LoginForm').css({'min-height': $(window).height() - $('.HeaderDesktopContainer').outerHeight() - $('.FooterContainr').outerHeight()});
+
+        if ($('.MyOgeroDashboardSection2').outerHeight() > $('.MyOgeroDashboardSection1').outerHeight()) {
+            $('.MyOgeroDashboardSection1').outerHeight($('.MyOgeroDashboardSection2').outerHeight());
+        } else {
+            $('.MyOgeroDashboardSection2').outerHeight($('.MyOgeroDashboardSection1').outerHeight());
+        }
+        if ($('.BillNumberChange').length > 0) {
+            $('.MyOgeroDashboardSection3, .MyOgeroDashboardSection2, .MyOgeroDashboardSection1').css({'min-height': $(document).height() - $('.BillNumberChange').outerHeight() - $('.HeaderDesktopContainer').outerHeight() - $('.MyOgeroMenuContainer').outerHeight() - $('.FooterContainr').outerHeight()});
+        } else {
+            $('.MyOgeroDashboardSection3, .MyOgeroDashboardSection2, .MyOgeroDashboardSection1').css({'min-height': $(document).height() - $('.HeaderDesktopContainer').outerHeight() - $('.MyOgeroMenuContainer').outerHeight() - $('.FooterContainr').outerHeight()});
+        }
+    }
+    $('.ServiceInfoTextText').find('a').not('.BidDownload').addClass('BackgroundGradient');
+    $('.ServiceInfoTextText').find('a').not('.BidDownload').append(' <b>&gt;</b>');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111620461-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-111620461-1');
+</script>
+</body>
+</html>

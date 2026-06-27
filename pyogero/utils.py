@@ -74,13 +74,32 @@ def parse_content(content: Content) -> BeautifulSoup:
     return BeautifulSoup(content, "html.parser")
 
 
+def __parse_consumption_grid_row(status_div: Tag) -> tuple[str, str] | None:
+    """Extract label and value from a MyConsumptionGrid row."""
+    spans = status_div.find_all("span", recursive=False)
+    if len(spans) < 2:
+        return None
+    key = spans[0].get_text(strip=True)
+    value = " ".join(part for s in spans[1:] if (part := s.get_text(strip=True)))
+    return key, value
+
+
 def parse_consumption_info(content: Content) -> ConsumptionInfo:
     """Parse consumption info."""
     info = ConsumptionInfo()
     statuses = parse_content(content).find_all(class_="MyConsumptionGrid")
 
+    if not statuses:
+        msg = "Consumption grid not found in consumption HTML"
+        raise OgeroParseError(msg)
+
     for status_div in statuses:
-        [key, value] = [span.text.strip() for span in status_div]
+        if not isinstance(status_div, Tag):
+            continue
+        row = __parse_consumption_grid_row(status_div)
+        if row is None:
+            continue
+        key, value = row
 
         if key == CONNECTION_SPEED:
             info.speed = value
@@ -90,7 +109,7 @@ def parse_consumption_info(content: Content) -> ConsumptionInfo:
             info.total_consumption = __parse_status_value(value)
         elif key == EXTRA_CONSUMPTION:
             info.extra_consumption = __parse_status_value(value)
-        elif key == LAST_UPDATE:
+        elif key == LAST_UPDATE and value:
             info.last_update = datetime.strptime(value, "%d/%m/%Y %H:%M").replace(
                 tzinfo=LEBANON_TIMEZONE
             )
