@@ -3,5 +3,5 @@
 # Sourced from homeassistant/core 2026.3.2 package_constraints.txt.
 requests==2.32.5
 aiohttp==3.13.3
-beautifulsoup4==4.13.3
+beautifulsoup4==4.15.0
 pydantic==2.12.2
