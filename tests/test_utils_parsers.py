@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from datetime import datetime
 
 import pytest
@@ -19,6 +20,7 @@ from .mock_data import (
     bill_response,
     consumption_response,
     consumption_response_split_spans,
+    consumption_response_unlimited_quota,
     dashboard_response,
     unauthorized_response,
 )
@@ -75,6 +77,15 @@ def test_parse_consumption_info_split_spans() -> None:
     assert info.total_consumption == 499.0
     assert info.extra_consumption == 0.0
     assert info.last_update == datetime(2024, 6, 25, 21, 17, tzinfo=LEBANON_TIMEZONE)
+
+
+def test_parse_consumption_info_unlimited_quota() -> None:
+    """An 'Unlimited' quota parses to infinity instead of raising OverflowError."""
+    data, _, _ = consumption_response_unlimited_quota()
+    info = parse_consumption_info(data)
+    assert math.isinf(info.quota)
+    assert info.total_consumption == 499.0
+    assert info.extra_consumption == 0.0
 
 
 def test_parse_consumption_info_missing_grid() -> None:

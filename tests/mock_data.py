@@ -84,6 +84,33 @@ def consumption_response_split_spans() -> MockDataResponse:
     return data, HTTPStatus.OK, html_headers
 
 
+def consumption_response_unlimited_quota() -> MockDataResponse:
+    """Consumption response where the total quota is reported as Unlimited."""
+    data: str = """
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Ogero - My Consumption</title>
+    </head>
+    <body>
+        <div class="MyConsumptionLeft">
+            <div class="MyConsumptionGrid">
+                <span>Current Bundle</span> <span>up to 50Mbps</span> <span>(FUP)</span>
+            </div>
+            <div class="MyConsumptionGrid">
+                <span>Total Quota</span> <span>Unlimited</span>
+            </div>
+            <div class="MyConsumptionGrid"><span>Total Consumption</span><span>499 GB</span></div>
+            <div class="MyConsumptionGrid"><span>Extra Consumption</span><span>0 GB</span></div>
+            <div class="MyConsumptionGrid"><span>Consumption Until</span><span>25/06/2024 21:17</span></div>
+        </div>
+    </body>
+</html>
+"""
+
+    return data, HTTPStatus.OK, html_headers
+
+
 def bill_response() -> MockDataResponse:
     """Bill response (redacted live sample)."""
     return _load_fixture("bill.html"), HTTPStatus.OK, html_headers

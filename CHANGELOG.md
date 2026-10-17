@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.14.3
+
+- Fix `OverflowError` raised when the My Ogero portal reports the total quota as `Unlimited`. `ConsumptionInfo.quota` is now a `float` and parses to `inf` for unlimited plans instead of failing to convert to `int`.
+
 ## 0.14.2
 
 - Fix consumption parsing when the My Ogero portal splits values across multiple `<span>` tags or inserts whitespace text nodes between spans.

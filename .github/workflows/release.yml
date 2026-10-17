@@ -103,6 +103,7 @@ jobs:
         with:
           tag: ${{ github.ref_name }}
           allowUpdates: true
+          generateReleaseNotes: true
           artifacts: dist/*
           replacesArtifacts: true
 

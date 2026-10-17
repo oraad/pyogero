@@ -412,7 +412,7 @@ wheels = [
 
 [[package]]
 name = "pyogero"
-version = "0.14.2"
+version = "0.14.3"
 source = { editable = "." }
 dependencies = [
     { name = "aiohttp" },

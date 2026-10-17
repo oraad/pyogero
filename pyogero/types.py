@@ -102,7 +102,7 @@ class ConsumptionInfo:
     """Internet consumption snapshot."""
 
     speed: str = ""
-    quota: int = 0
+    quota: float = 0
     total_consumption: float = 0
     extra_consumption: float = 0
     last_update: datetime | None = None

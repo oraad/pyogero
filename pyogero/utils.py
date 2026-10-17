@@ -104,7 +104,7 @@ def parse_consumption_info(content: Content) -> ConsumptionInfo:
         if key == CONNECTION_SPEED:
             info.speed = value
         elif key == QUOTA:
-            info.quota = int(__parse_status_value(value))
+            info.quota = __parse_status_value(value)
         elif key == TOTAL_CONSUMPTION:
             info.total_consumption = __parse_status_value(value)
         elif key == EXTRA_CONSUMPTION:
