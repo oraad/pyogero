@@ -1,0 +1,6 @@
+# Normalize line endings: store text files with LF in the repository and
+# check them out with LF, regardless of the platform.
+* text=auto eol=lf
+
+# Certificates are text and should keep LF endings.
+*.pem text eol=lf
